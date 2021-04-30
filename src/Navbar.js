@@ -3,13 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
+  link: {
     marginRight: theme.spacing(2),
   },
   title: {
@@ -25,10 +26,26 @@ function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Language Chat
+            <Link
+              component={RouterLink}
+              to="/"
+              color="inherit"
+              underline="none"
+            >
+              Language Chat
+            </Link>
           </Typography>
-          <Button color="inherit">Log In</Button>
-          <Button color="inherit">Sign Up</Button>
+          <Link
+            component={RouterLink}
+            to="/login"
+            color="inherit"
+            className={classes.link}
+          >
+            Log In
+          </Link>
+          <Link component={RouterLink} to="/signup" color="inherit">
+            Sign Up
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
