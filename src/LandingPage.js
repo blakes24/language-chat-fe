@@ -35,7 +35,7 @@ function LandingPage() {
           </Grid>
           <Grid item xs={12} sm={4} className={classes.grid}>
             <img src="/video-chat.jpg" height="250px" alt="" />
-            <h3>Improve your laguage skills and meet great people.</h3>
+            <h3>Improve your language skills and meet new people.</h3>
           </Grid>
         </Grid>
       </Container>
