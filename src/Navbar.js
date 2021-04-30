@@ -32,7 +32,7 @@ function Navbar() {
               color="inherit"
               underline="none"
             >
-              Language Chat
+              LangChat
             </Link>
           </Typography>
           <Link

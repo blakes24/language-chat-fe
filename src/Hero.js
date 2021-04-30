@@ -1,6 +1,7 @@
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -39,11 +40,11 @@ function Hero() {
     <Container maxWidth={false} className={classes.root}>
       <Container maxWidth={false} className={classes.filter}>
         <Container maxWidth={false} className={classes.main}>
-          <h1 className={classes.h1}>Language Chat</h1>
+          <h1 className={classes.h1}>LangChat</h1>
           <h2>
             Here's some cool stuff about this app to make you want to sign up.
           </h2>
-          <Button variant="contained" color="secondary" size="large">
+          <Button variant="contained" color="secondary" size="large" component={RouterLink} to="/signup">
             Sign Up
           </Button>
         </Container>
