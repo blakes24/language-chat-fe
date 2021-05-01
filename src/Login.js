@@ -2,23 +2,29 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
+import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
-    textAlign: "center"
-  }
-}))
+    textAlign: "center",
+  },
+});
 
 function Login() {
   const classes = useStyles();
+  const history = useHistory();
+
   function login(values) {
-    console.log(values)
+    console.log(values);
+    history.push("/");
   }
-  function facebookLogin() {
-    console.log("facebook")
+  function facebookLogin(user) {
+    console.log(user);
+    history.push("/");
   }
-  function googleLogin() {
-    console.log("google")
+  function googleLogin(user) {
+    console.log(user);
+    history.push("/");
   }
 
   return (

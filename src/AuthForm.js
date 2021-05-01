@@ -1,9 +1,12 @@
 import React from "react";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import SocialButton from "./SocialButton";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const validate = (values) => {
   const errors = {};
@@ -52,12 +55,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
-    marginRight: "1rem"
+    marginRight: "1rem",
   },
 }));
 
 function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
-  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -67,12 +69,15 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
     onSubmit: async (values) => {
       try {
         await handleSubmit(values);
-        history.push("/");
       } catch (err) {
         formik.errors.password = err;
       }
     },
   });
+
+  const handleSocialLoginFailure = (err) => {
+    console.error(err);
+  };
 
   const classes = useStyles();
 
@@ -89,7 +94,6 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
           label="Email"
           variant="outlined"
           style={{ margin: 8 }}
-          InputProps={{ disableUnderline: true }}
           size="small"
           fullWidth
           onChange={formik.handleChange}
@@ -107,7 +111,6 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
           autoComplete="current-password"
           variant="outlined"
           style={{ margin: 8 }}
-          InputProps={{ disableUnderline: true }}
           size="small"
           fullWidth
           onChange={formik.handleChange}
@@ -132,28 +135,27 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
       </form>
       <h4 className={classes.divider}>OR</h4>
       <div className={classes.root}>
-        <Button
-          variant="contained"
-          type="submit"
-          fullWidth
-          size="large"
-          style={{ margin: 8 }}
-          className={classes.google}
-          onClick={handleGoogle}
-        >
-          {`${text} with Google`}
-        </Button>
-        <Button
-          variant="contained"
+        <SocialButton
           color="secondary"
-          type="submit"
-          fullWidth
-          size="large"
-          style={{ margin: 8 }}
-          onClick={handleFacebook}
+          provider="facebook"
+          appId="299527098433094"
+          onLoginSuccess={handleFacebook}
+          onLoginFailure={handleSocialLoginFailure}
         >
+          <FacebookIcon className={classes.icon} />
           {` ${text} with Facebook`}
-        </Button>
+        </SocialButton>
+        <SocialButton
+          color="secondary"
+          className={classes.google}
+          provider="google"
+          appId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          onLoginSuccess={handleGoogle}
+          onLoginFailure={handleSocialLoginFailure}
+        >
+          <FontAwesomeIcon className={classes.icon} icon={faGoogle} />{" "}
+          {`${text} with Google`}
+        </SocialButton>
       </div>
     </>
   );
