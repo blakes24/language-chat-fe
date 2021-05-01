@@ -14,11 +14,11 @@ function Signup() {
   function signup(values) {
     console.log(values)
   }
-  function facebookSignup() {
-    console.log("facebook")
+  function facebookSignup(user) {
+    console.log(user);
   }
-  function googleSignup() {
-    console.log("google")
+  function googleSignup(user) {
+    console.log(user);
   }
 
   return (
