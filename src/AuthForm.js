@@ -146,7 +146,7 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
           color="secondary"
           className={classes.facebook}
           provider="facebook"
-          appId="299527098433094"
+          appId={process.env.REACT_APP_FACEBOOK_APP_ID}
           onLoginSuccess={handleFacebook}
           onLoginFailure={handleSocialLoginFailure}
         >
