@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles({
     margin: 0,
     fontSize: "2.5rem",
   },
+  button: {
+    textShadow: "none",
+  },
 });
 
 function Hero() {
@@ -44,7 +47,14 @@ function Hero() {
           <h2>
             Here's some cool stuff about this app to make you want to sign up.
           </h2>
-          <Button variant="contained" color="secondary" size="large" component={RouterLink} to="/signup">
+          <Button
+            variant="contained"
+            className={classes.button}
+            color="secondary"
+            size="large"
+            component={RouterLink}
+            to="/signup"
+          >
             Sign Up
           </Button>
         </Container>
