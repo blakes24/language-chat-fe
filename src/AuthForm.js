@@ -54,6 +54,13 @@ const useStyles = makeStyles((theme) => ({
       background: "#b04238",
     },
   },
+  facebook: {
+    background: "#4267B2",
+    color: "white",
+    "&:hover": {
+      background: "#35538f",
+    },
+  },
   icon: {
     marginRight: "1rem",
   },
@@ -137,6 +144,7 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
       <div className={classes.root}>
         <SocialButton
           color="secondary"
+          className={classes.facebook}
           provider="facebook"
           appId="299527098433094"
           onLoginSuccess={handleFacebook}

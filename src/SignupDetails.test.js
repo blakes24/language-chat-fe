@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import Login from "./Login";
+import SignupDetails from "./SignupDetails";
 
 test("renders without crashing", () => {
-  render(<Login />);
+  render(<SignupDetails />);
 });

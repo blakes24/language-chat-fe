@@ -30,7 +30,12 @@ function Login() {
   return (
     <Container maxWidth="sm" className={classes.root}>
       <h1>Log In</h1>
-      <AuthForm text="Log In" handleFacebook={facebookLogin} handleGoogle={googleLogin} handleSubmit={login} />
+      <AuthForm
+        text="Log In"
+        handleFacebook={facebookLogin}
+        handleGoogle={googleLogin}
+        handleSubmit={login}
+      />
     </Container>
   );
 }
