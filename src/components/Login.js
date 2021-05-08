@@ -1,8 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import { useHistory } from "react-router-dom";
+import UserContext from "../helpers/UserContext";
+import ChatApi from "../helpers/api";;
 
 const useStyles = makeStyles({
   root: {
@@ -13,17 +15,27 @@ const useStyles = makeStyles({
 function Login() {
   const classes = useStyles();
   const history = useHistory();
+  const {  setToken  } = useContext(UserContext);;
 
-  function login(values) {
-    console.log(values);
+  async function login(values) {
+    let res = await ChatApi.getToken(values);
+    setToken(res.token);
     history.push("/");
   }
-  function facebookLogin(user) {
-    console.log(user);
+  async function facebookLogin(user) {
+    let res = await ChatApi.getToken({
+      provider: "facebook",
+      token: user._token.idToken,
+    });
+    setToken(res.token);;
     history.push("/");
   }
-  function googleLogin(user) {
-    console.log(user);
+  async function googleLogin(user) {
+    let res = await ChatApi.getToken({
+      provider: "google",
+      token: user._token.idToken,
+    });
+    setToken(res.token);;
     history.push("/");
   }
 
