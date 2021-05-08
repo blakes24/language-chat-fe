@@ -1,10 +1,12 @@
-import React from "react";
+import { useContext } from "react";
 import { useFormik, FormikProvider } from "formik";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormikSelect from "./FormikSelect";
 import { useHistory } from "react-router-dom";
+import ChatApi from "../helpers/api";
+import UserContext from "../helpers/UserContext";
 
 const validate = (values) => {
   const errors = {};
@@ -33,14 +35,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignupDetails({ email, name, password, imageUrl }) {
+function SignupDetails({
+  email,
+  name,
+  password,
+  imageUrl,
+  socialProvider,
+  socialId,
+}) {
   const history = useHistory();
+  const { setToken } = useContext(UserContext);
+
   const formik = useFormik({
     initialValues: {
       email: email,
       name: name,
       password: password,
       imageUrl: imageUrl,
+      socialProvider: socialProvider,
+      socialId: socialId,
       bio: "",
       speaksLang: "",
       speaksLevel: "native",
@@ -50,7 +63,8 @@ function SignupDetails({ email, name, password, imageUrl }) {
     validate,
     onSubmit: async (values) => {
       try {
-        console.log(values);
+        const res = await ChatApi.register(values);
+        setToken(res.token);
         history.push("/");
       } catch (err) {
         formik.errors.name = err;

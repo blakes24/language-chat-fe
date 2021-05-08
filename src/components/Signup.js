@@ -2,7 +2,8 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
-import SignupDetails from "./SignupDetails"
+import SignupDetails from "./SignupDetails";
+import ChatApi from "../helpers/api";
 
 const useStyles = makeStyles({
   root: {
@@ -17,31 +18,44 @@ function Signup() {
     name: "",
     password: "",
     imageUrl: "",
+    socialProvider: "",
+    socialId: "",
   });
-  
+
   const classes = useStyles();
   function signup(values) {
-    console.log(values);
     setNewUser({ ...newUser, email: values.email, password: values.password });
     setFormPage(2);
   }
-  function facebookSignup(user) {
+  async function facebookSignup(user) {
     console.log(user);
+    await ChatApi.verify({
+      provider: "facebook",
+      token: user._token.accessToken,
+    });
     setNewUser({
       ...user,
       email: user._profile.email,
       name: user._profile.firstName,
       imageUrl: user._profile.profilePicURL,
+      socialProvider: "facebook",
+      socialId: user._profile.id,
     });
     setFormPage(2);
   }
-  function googleSignup(user) {
+  async function googleSignup(user) {
     console.log(user);
+    await ChatApi.verify({
+      provider: "google",
+      token: user._token.idToken,
+    });
     setNewUser({
       ...user,
       email: user._profile.email,
       name: user._profile.firstName,
       imageUrl: user._profile.profilePicURL,
+      socialProvider: "google",
+      socialId: user._profile.id,
     });
     setFormPage(2);
   }
@@ -62,6 +76,8 @@ function Signup() {
           name={newUser.name}
           password={newUser.password}
           imageUrl={newUser.imageUrl}
+          socialProvider={newUser.socialProvider}
+          socialId={newUser.socialId}
         />
       )}
     </Container>
