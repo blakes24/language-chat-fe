@@ -15,11 +15,11 @@ const useStyles = makeStyles({
 function Login() {
   const classes = useStyles();
   const history = useHistory();
-  const {  setToken  } = useContext(UserContext);;
+  const { setToken } = useContext(UserContext);
 
   async function login(values) {
     let res = await ChatApi.getToken(values);
-    setToken(res.token);
+    setToken(res);
     history.push("/");
   }
   async function facebookLogin(user) {
@@ -27,7 +27,7 @@ function Login() {
       provider: "facebook",
       token: user._token.idToken,
     });
-    setToken(res.token);;
+    setToken(res);
     history.push("/");
   }
   async function googleLogin(user) {
@@ -35,7 +35,7 @@ function Login() {
       provider: "google",
       token: user._token.idToken,
     });
-    setToken(res.token);;
+    setToken(res);
     history.push("/");
   }
 

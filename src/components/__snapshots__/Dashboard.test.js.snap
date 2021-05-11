@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg"
+  >
+    <h1
+      class="MuiTypography-root makeStyles-root-2 MuiTypography-h6 MuiTypography-alignCenter"
+    >
+      Find a partner and start chatting!
+    </h1>
+    0
+  </div>
+</DocumentFragment>
+`;

@@ -32,11 +32,19 @@ class ChatApi {
     this.token = res.token;
     return res.token;
   }
+
   /** Get user details. */
 
   static async getUser(userId) {
-    let res = await this.request(`user/${userId}`);
+    let res = await this.request(`users/${userId}`);
     return res.user;
+  }
+
+  /** Get all users, filter by speaks or learning language */
+
+  static async getAllUsers(filters) {
+    let res = await this.request(`users`, filters);
+    return res.users;
   }
 
   static async verify(token) {
@@ -48,7 +56,8 @@ class ChatApi {
     let res = data.email
       ? await this.request(`auth/token`, data, "post")
       : await this.request(`auth/social-token`, data, "post");
-    return res;
+    this.token = res.token;
+    return res.token;
   }
 }
 

@@ -56,7 +56,6 @@ function SignupDetails({
       socialId: socialId,
       bio: "",
       speaksLang: "",
-      speaksLevel: "native",
       learnsLang: "",
       learnsLevel: "",
     },
@@ -64,22 +63,33 @@ function SignupDetails({
     onSubmit: async (values) => {
       try {
         const res = await ChatApi.register(values);
-        setToken(res.token);
+        setToken(res);
         history.push("/");
       } catch (err) {
         formik.errors.name = err;
       }
     },
   });
+
   const languages = [
-    { value: "spanish", label: "Spanish" },
-    { value: "french", label: "French" },
-    { value: "english", label: "English" },
+    { label: "Arabic", value: "ar" },
+    { label: "Chinese", value: "zh" },
+    { label: "English", value: "en" },
+    { label: "French", value: "fr" },
+    { label: "German", value: "de" },
+    { label: "Hindi", value: "hi" },
+    { label: "Indonesian", value: "id" },
+    { label: "Italian", value: "it" },
+    { label: "Japanese", value: "ja" },
+    { label: "Korean", value: "ko" },
+    { label: "Portuguese", value: "pt" },
+    { label: "Russian", value: "ru" },
+    { label: "Spanish", value: "es" },
   ];
   const levels = [
-    { value: "beginner", label: "Beginner" },
-    { value: "intermediate", label: "Intermediate" },
-    { value: "advanced", label: "Advanced" },
+    { value: 1, label: "Beginner" },
+    { value: 2, label: "Intermediate" },
+    { value: 3, label: "Advanced" },
   ];
   const classes = useStyles();
 
