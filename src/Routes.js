@@ -1,6 +1,5 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/LandingPage";
@@ -12,6 +11,7 @@ import UserContext from "./helpers/UserContext";
 import useLocalStorage from "./helpers/useLocalStorage";
 import ChatApi from "./helpers/api";
 import jwtDecode from "jwt-decode";
+import NavWrapper from "./components/NavWrapper";
 
 function Routes() {
   const [token, setToken] = useLocalStorage("token", "");
@@ -38,30 +38,31 @@ function Routes() {
 
   return (
     <UserContext.Provider value={{ user, setToken }}>
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          {user ? <Dashboard /> : <LandingPage />}
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-        <Route exact path="/partners">
-          <Partners />
-        </Route>
-        <Route exact path="/messages">
-          <Messages />
-        </Route>
-        <Route exact path="/signup">
-          <Signup />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route>
-          <p>Page not found.</p>
-        </Route>
-      </Switch>
+      <NavWrapper>
+        <Switch>
+          <Route exact path="/">
+            {user ? <Dashboard /> : <LandingPage />}
+          </Route>
+          <Route exact path="/profile">
+            {user ? <Profile /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/partners">
+            {user ? <Partners /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/messages">
+            {user ? <Messages /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route>
+            <p>Page not found.</p>
+          </Route>
+        </Switch>
+      </NavWrapper>
     </UserContext.Provider>
   );
 }

@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     flexGrow: 1,
     padding: 0,
     margin: "0 auto",
-    maxWidth: "550px",
+    maxWidth: "700px",
   },
 });
 
