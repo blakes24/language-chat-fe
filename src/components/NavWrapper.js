@@ -23,6 +23,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: 280,
     },
-    backgroundColor: "#f2ebff",
+    backgroundColor: theme.palette.secondary.light,
   },
   content: {
     flexGrow: 1,
-    marginBottom: "1rem",
+    minHeight: "100vh",
   },
   link: {
     marginRight: theme.spacing(2),
@@ -107,7 +108,7 @@ function NavWrapper({ window, children }) {
           className={classes.listItem}
         >
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon color="secondary" />
           </ListItemIcon>
           <ListItemText primary={"Home"} />
         </ListItem>
@@ -119,7 +120,7 @@ function NavWrapper({ window, children }) {
           className={classes.listItem}
         >
           <ListItemIcon>
-            <PeopleIcon />
+            <PeopleIcon color="secondary" />
           </ListItemIcon>
           <ListItemText primary={"Partners"} />
         </ListItem>
@@ -131,7 +132,7 @@ function NavWrapper({ window, children }) {
           className={classes.listItem}
         >
           <ListItemIcon>
-            <MailIcon />
+            <MailIcon color="secondary" />
           </ListItemIcon>
           <ListItemText primary={"Messages"} />
         </ListItem>
@@ -143,7 +144,7 @@ function NavWrapper({ window, children }) {
           className={classes.listItem}
         >
           <ListItemIcon>
-            <AccountCircleIcon />
+            <AccountCircleIcon color="secondary" />
           </ListItemIcon>
           <ListItemText primary={"Profile"} />
         </ListItem>
@@ -154,7 +155,7 @@ function NavWrapper({ window, children }) {
           className={classes.listItem}
         >
           <ListItemIcon>
-            <ExitToAppIcon />
+            <ExitToAppIcon color="secondary" />
           </ListItemIcon>
           <ListItemText primary={"Log Out"} />
         </ListItem>
@@ -166,88 +167,90 @@ function NavWrapper({ window, children }) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <HideOnScroll>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            {user && (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                className={classes.menuButton}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-            <Typography variant="h6" className={classes.title}>
-              <Link
-                component={RouterLink}
-                to="/"
-                color="inherit"
-                underline="none"
-              >
-                LangChat
-              </Link>
-            </Typography>
-            {!user && (
-              <>
+    <>
+      <div className={classes.root}>
+        <CssBaseline />
+        <HideOnScroll>
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              {user && (
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
+              <Typography variant="h6" className={classes.title}>
                 <Link
                   component={RouterLink}
-                  to="/login"
+                  to="/"
                   color="inherit"
-                  className={classes.link}
+                  underline="none"
                 >
-                  Log In
+                  LangChat
                 </Link>
-                <Link component={RouterLink} to="/signup" color="inherit">
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      {user && (
-        <nav className={classes.drawer} aria-label="navigation">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden mdUp>
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden smDown>
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-      )}
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
-      </main>
-    </div>
+              </Typography>
+              {!user && (
+                <>
+                  <Link
+                    component={RouterLink}
+                    to="/login"
+                    color="inherit"
+                    className={classes.link}
+                  >
+                    Log In
+                  </Link>
+                  <Link component={RouterLink} to="/signup" color="inherit">
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
+        {user && (
+          <nav className={classes.drawer} aria-label="navigation">
+            <Hidden mdUp>
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden smDown>
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+        )}
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
 

@@ -21,6 +21,7 @@ const user = {
     },
   ],
 };
+
 test("renders without crashing", () => {
   render(<UserCard user={user} />);
 });

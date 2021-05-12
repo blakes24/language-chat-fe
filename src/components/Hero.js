@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Link as RouterLink } from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     textAlign: "center",
@@ -11,42 +11,64 @@ const useStyles = makeStyles({
     height: "50vh",
     padding: 0,
     marginBottom: "2rem",
-    backgroundImage: "url('/home5.jpg')",
+    backgroundImage: "url('/world-lg.jpg')",
+    backgroundColor: "#FFFFFF",
     backgroundPosition: "center",
-    backgroundSize: "cover",
-  },
-  filter: {
-    height: "100%",
-    background:
-      "linear-gradient( #E64A1950 0%, #3F51B599 50%, #E64A1950 100% )",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
     display: "flex",
     alignItems: "center",
   },
   main: {
-    color: "white",
-    textShadow: "-2px 2px 8px #171873",
+    color: theme.palette.secondary.main,
     margin: "0 auto",
     padding: "0 2rem",
+    height: "100%",
+  },
+  title: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      height: "100%",
+      alignItems: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+      marginRight: "4rem",
+    },
   },
   h1: {
-    margin: 0,
+    marginTop: "3rem",
+    marginBottom: 0,
     fontSize: "2.5rem",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "1rem",
+      marginBottom: 0,
+      fontSize: "2rem",
+    },
+  },
+  h2: {
+    [theme.breakpoints.down("xs")]: {
+      margin: 0,
+      fontSize: "1.1rem",
+    },
+    marginTop: ".2rem",
   },
   button: {
-    textShadow: "none",
+    marginBottom: "1.2rem",
   },
-});
+}));
 
 function Hero() {
   const classes = useStyles();
   return (
     <Container maxWidth={false} className={classes.root}>
-      <Container maxWidth={false} className={classes.filter}>
-        <Container maxWidth={false} className={classes.main}>
-          <h1 className={classes.h1}>LangChat</h1>
-          <h2>
-            Here's some cool stuff about this app to make you want to sign up.
-          </h2>
+      <Container maxWidth={false} className={classes.main}>
+        <div className={classes.title}>
+          <div>
+            <h1 className={classes.h1}>LangChat</h1>
+            <h2 className={classes.h2}>Practice with native speakers.</h2>
+          </div>
           <Button
             variant="contained"
             className={classes.button}
@@ -57,7 +79,7 @@ function Hero() {
           >
             Sign Up
           </Button>
-        </Container>
+        </div>
       </Container>
     </Container>
   );

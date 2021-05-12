@@ -3,114 +3,118 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-12 MuiContainer-maxWidthSm"
+    class="MuiContainer-root makeStyles-root-13 MuiContainer-maxWidthSm"
   >
-    <h1>
-      Log In
-    </h1>
-    <form
-      autocomplete="off"
-      class="makeStyles-root-13"
-    >
-      <div
-        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
-        style="margin: 8px;"
-      >
-        <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-          data-shrink="false"
-          for="email"
-          id="email-label"
-        >
-          Email
-        </label>
-        <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-        >
-          <input
-            aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-            id="email"
-            name="email"
-            type="text"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="PrivateNotchedOutline-legendLabelled-21"
-            >
-              <span>
-                Email
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-      <div
-        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
-        style="margin: 8px;"
-      >
-        <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-          data-shrink="false"
-          for="password"
-          id="password-label"
-        >
-          Password
-        </label>
-        <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-        >
-          <input
-            aria-invalid="false"
-            autocomplete="current-password"
-            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-            id="password"
-            name="password"
-            type="password"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="PrivateNotchedOutline-legendLabelled-21"
-            >
-              <span>
-                Password
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
-        style="margin: 8px;"
-        tabindex="0"
-        type="submit"
-      >
-        <span
-          class="MuiButton-label"
-        >
-          Log In
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
-    </form>
-    <h4
-      class="makeStyles-divider-15"
-    >
-      OR
-    </h4>
     <div
-      class="makeStyles-root-13"
-    />
+      class="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <h1>
+        Log In
+      </h1>
+      <form
+        autocomplete="off"
+        class="makeStyles-root-15"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+          style="margin: 8px;"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+            data-shrink="false"
+            for="email"
+            id="email-label"
+          >
+            Email
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+              id="email"
+              name="email"
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden="true"
+              class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="PrivateNotchedOutline-legendLabelled-23"
+              >
+                <span>
+                  Email
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+          style="margin: 8px;"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+            data-shrink="false"
+            for="password"
+            id="password-label"
+          >
+            Password
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="current-password"
+              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+              id="password"
+              name="password"
+              type="password"
+              value=""
+            />
+            <fieldset
+              aria-hidden="true"
+              class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="PrivateNotchedOutline-legendLabelled-23"
+              >
+                <span>
+                  Password
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+          style="margin: 8px;"
+          tabindex="0"
+          type="submit"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Log In
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </form>
+      <h4
+        class="makeStyles-divider-17"
+      >
+        OR
+      </h4>
+      <div
+        class="makeStyles-root-15"
+      />
+    </div>
   </div>
 </DocumentFragment>
 `;

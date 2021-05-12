@@ -3,17 +3,17 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="makeStyles-root-12"
+    class="makeStyles-root-14"
   >
     <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-14 mui-fixed MuiPaper-elevation4"
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-16 mui-fixed MuiPaper-elevation4"
     >
       <div
         class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
       >
         <button
           aria-label="open drawer"
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-15 MuiIconButton-colorInherit MuiIconButton-edgeStart"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-17 MuiIconButton-colorInherit MuiIconButton-edgeStart"
           tabindex="0"
           type="button"
         >
@@ -36,7 +36,7 @@ exports[`matches snapshot 1`] = `
           />
         </button>
         <h6
-          class="MuiTypography-root makeStyles-title-20 MuiTypography-h6"
+          class="MuiTypography-root makeStyles-title-22 MuiTypography-h6"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorInherit"
@@ -49,15 +49,30 @@ exports[`matches snapshot 1`] = `
     </header>
     <nav
       aria-label="navigation"
-      class="makeStyles-drawer-13"
+      class="makeStyles-drawer-15"
     />
     <main
-      class="makeStyles-content-18"
+      class="makeStyles-content-20"
     >
       <div
-        class="makeStyles-toolbar-16"
+        class="makeStyles-toolbar-18"
       />
     </main>
   </div>
+  <footer
+    class="makeStyles-root-25"
+  >
+    <div>
+      <p>
+        © LangChat
+      </p>
+      <a
+        class="makeStyles-link-26"
+        href="http://www.freepik.com"
+      >
+        Graphics designed by stories/Freepik
+      </a>
+    </div>
+  </footer>
 </DocumentFragment>
 `;
