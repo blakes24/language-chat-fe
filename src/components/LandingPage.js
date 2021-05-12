@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     padding: "2rem",
     alignItems: "center",
   },
+  img: {
+    width: "100%",
+    maxWidth: "300px",
+  },
 });
 
 function LandingPage() {
@@ -24,18 +28,21 @@ function LandingPage() {
         <Hero />
         <Grid container spacing={0}>
           <Grid item xs={12} sm={4} className={classes.grid}>
-            <img src="/phone.jpg" height="250px" alt="" />
-            <h3>Connect with chat partners from all over the world.</h3>
+            <img src="/language.jpg" className={classes.img} alt="" />
+            <h3>Improve your language skills the natural way.</h3>
           </Grid>
           <Grid item xs={12} sm={4} className={classes.grid}>
             <div>
-              <img src="/flags.jpg" height="250px" alt="" />
-              <h3>Find people who speak the language you want to practice.</h3>
+              <img src="/chat.jpg" className={classes.img} alt="" />
+              <h3>
+                Easily find chat partners who speak the language you're
+                learning.
+              </h3>
             </div>
           </Grid>
           <Grid item xs={12} sm={4} className={classes.grid}>
-            <img src="/video-chat.jpg" height="250px" alt="" />
-            <h3>Improve your language skills and meet new people.</h3>
+            <img src="/world-man.jpg" className={classes.img} alt="" />
+            <h3>Connect with people from all over the world.</h3>
           </Grid>
         </Grid>
       </Container>

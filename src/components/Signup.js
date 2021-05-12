@@ -4,10 +4,19 @@ import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import SignupDetails from "./SignupDetails";
 import ChatApi from "../helpers/api";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles({
   root: {
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "80vh",
+  },
+  card: {
+    padding: "1rem",
+    marginTop: "2rem",
   },
 });
 
@@ -60,24 +69,26 @@ function Signup() {
 
   return (
     <Container maxWidth="sm" className={classes.root}>
-      <h1>Sign Up</h1>
-      {formPage === 1 ? (
-        <AuthForm
-          text="Sign Up"
-          handleFacebook={facebookSignup}
-          handleGoogle={googleSignup}
-          handleSubmit={signup}
-        />
-      ) : (
-        <SignupDetails
-          email={newUser.email}
-          name={newUser.name}
-          password={newUser.password}
-          imageUrl={newUser.imageUrl}
-          socialProvider={newUser.socialProvider}
-          socialId={newUser.socialId}
-        />
-      )}
+      <Card className={classes.card}>
+        <h1>Sign Up</h1>
+        {formPage === 1 ? (
+          <AuthForm
+            text="Sign Up"
+            handleFacebook={facebookSignup}
+            handleGoogle={googleSignup}
+            handleSubmit={signup}
+          />
+        ) : (
+          <SignupDetails
+            email={newUser.email}
+            name={newUser.name}
+            password={newUser.password}
+            imageUrl={newUser.imageUrl}
+            socialProvider={newUser.socialProvider}
+            socialId={newUser.socialId}
+          />
+        )}
+      </Card>
     </Container>
   );
 }

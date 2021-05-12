@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <footer
+    class="makeStyles-root-3"
+  >
+    <div>
+      <p>
+        © LangChat
+      </p>
+      <a
+        class="makeStyles-link-4"
+        href="http://www.freepik.com"
+      >
+        Graphics designed by stories/Freepik
+      </a>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

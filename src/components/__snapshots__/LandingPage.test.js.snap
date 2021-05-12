@@ -3,28 +3,32 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-8"
+    class="MuiContainer-root makeStyles-root-10"
   >
     <div
-      class="MuiContainer-root makeStyles-root-10"
+      class="MuiContainer-root makeStyles-root-13"
     >
       <div
-        class="MuiContainer-root makeStyles-filter-11"
+        class="MuiContainer-root makeStyles-main-14"
       >
         <div
-          class="MuiContainer-root makeStyles-main-12"
+          class="makeStyles-title-15"
         >
-          <h1
-            class="makeStyles-h1-13"
-          >
-            LangChat
-          </h1>
-          <h2>
-            Here's some cool stuff about this app to make you want to sign up.
-          </h2>
+          <div>
+            <h1
+              class="makeStyles-h1-16"
+            >
+              LangChat
+            </h1>
+            <h2
+              class="makeStyles-h2-17"
+            >
+              Practice with native speakers.
+            </h2>
+          </div>
           <a
             aria-disabled="false"
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-14 MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-18 MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
             href="/signup"
             role="button"
             tabindex="0"
@@ -45,41 +49,41 @@ exports[`matches snapshot 1`] = `
       class="MuiGrid-root MuiGrid-container"
     >
       <div
-        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        class="MuiGrid-root makeStyles-grid-11 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
         <img
           alt=""
-          height="250px"
-          src="/phone.jpg"
+          class="makeStyles-img-12"
+          src="/language.jpg"
         />
         <h3>
-          Connect with chat partners from all over the world.
+          Improve your language skills the natural way.
         </h3>
       </div>
       <div
-        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        class="MuiGrid-root makeStyles-grid-11 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
         <div>
           <img
             alt=""
-            height="250px"
-            src="/flags.jpg"
+            class="makeStyles-img-12"
+            src="/chat.jpg"
           />
           <h3>
-            Find people who speak the language you want to practice.
+            Easily find chat partners who speak the language you're learning.
           </h3>
         </div>
       </div>
       <div
-        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        class="MuiGrid-root makeStyles-grid-11 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
         <img
           alt=""
-          height="250px"
-          src="/video-chat.jpg"
+          class="makeStyles-img-12"
+          src="/world-man.jpg"
         />
         <h3>
-          Improve your language skills and meet new people.
+          Connect with people from all over the world.
         </h3>
       </div>
     </div>

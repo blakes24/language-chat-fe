@@ -4,11 +4,20 @@ import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import { useHistory } from "react-router-dom";
 import UserContext from "../helpers/UserContext";
-import ChatApi from "../helpers/api";;
+import ChatApi from "../helpers/api";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles({
   root: {
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "80vh",
+  },
+  card: {
+    padding: "1rem",
+    marginTop: "2rem",
   },
 });
 
@@ -41,13 +50,15 @@ function Login() {
 
   return (
     <Container maxWidth="sm" className={classes.root}>
-      <h1>Log In</h1>
-      <AuthForm
-        text="Log In"
-        handleFacebook={facebookLogin}
-        handleGoogle={googleLogin}
-        handleSubmit={login}
-      />
+      <Card className={classes.card}>
+        <h1>Log In</h1>
+        <AuthForm
+          text="Log In"
+          handleFacebook={facebookLogin}
+          handleGoogle={googleLogin}
+          handleSubmit={login}
+        />
+      </Card>
     </Container>
   );
 }
