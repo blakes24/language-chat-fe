@@ -28,7 +28,6 @@ function Signup() {
     setFormPage(2);
   }
   async function facebookSignup(user) {
-    console.log(user);
     await ChatApi.verify({
       provider: "facebook",
       token: user._token.accessToken,
@@ -44,7 +43,6 @@ function Signup() {
     setFormPage(2);
   }
   async function googleSignup(user) {
-    console.log(user);
     await ChatApi.verify({
       provider: "google",
       token: user._token.idToken,

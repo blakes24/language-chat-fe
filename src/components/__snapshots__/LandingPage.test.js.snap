@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root makeStyles-root-8"
+  >
+    <div
+      class="MuiContainer-root makeStyles-root-10"
+    >
+      <div
+        class="MuiContainer-root makeStyles-filter-11"
+      >
+        <div
+          class="MuiContainer-root makeStyles-main-12"
+        >
+          <h1
+            class="makeStyles-h1-13"
+          >
+            LangChat
+          </h1>
+          <h2>
+            Here's some cool stuff about this app to make you want to sign up.
+          </h2>
+          <a
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-14 MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+            href="/signup"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Sign Up
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container"
+    >
+      <div
+        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        <img
+          alt=""
+          height="250px"
+          src="/phone.jpg"
+        />
+        <h3>
+          Connect with chat partners from all over the world.
+        </h3>
+      </div>
+      <div
+        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        <div>
+          <img
+            alt=""
+            height="250px"
+            src="/flags.jpg"
+          />
+          <h3>
+            Find people who speak the language you want to practice.
+          </h3>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root makeStyles-grid-9 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        <img
+          alt=""
+          height="250px"
+          src="/video-chat.jpg"
+        />
+        <h3>
+          Improve your language skills and meet new people.
+        </h3>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -25,11 +25,7 @@ function Routes() {
       } else {
         try {
           ChatApi.token = token;
-          
-          let decoded = jwtDecode(token, { header: true });
-          console.log(decoded);
           const userId = jwtDecode(token).userId;
-          console.log(userId);
           const user = await ChatApi.getUser(userId);
           setUser(user);
         } catch (err) {
@@ -39,7 +35,7 @@ function Routes() {
     }
     getUser();
   }, [token]);
-  
+
   return (
     <UserContext.Provider value={{ user, setToken }}>
       <Navbar />

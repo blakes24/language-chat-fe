@@ -8,4 +8,13 @@ test("renders without crashing", () => {
       <SignupDetails />
     </UserProvider>
   );
+}); 
+
+it("matches snapshot", function () {
+  const { asFragment } = render(
+    <UserProvider>
+      <SignupDetails />
+    </UserProvider>
+  );
+  expect(asFragment()).toMatchSnapshot();
 });

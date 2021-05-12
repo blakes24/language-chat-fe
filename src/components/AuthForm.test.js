@@ -9,3 +9,8 @@ test("renders without crashing", () => {
     </MemoryRouter>
   );
 });
+
+it("matches snapshot", function () {
+  const { asFragment } = render(<AuthForm />);
+  expect(asFragment()).toMatchSnapshot();
+});

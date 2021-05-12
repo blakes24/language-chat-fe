@@ -1,20 +1,16 @@
 import { render } from "@testing-library/react";
-import LandingPage from "./LandingPage";
 import { MemoryRouter } from "react-router";
+import Dashboard from "./Dashboard";
 
 test("renders without crashing", () => {
   render(
     <MemoryRouter>
-      <LandingPage />
+      <Dashboard />
     </MemoryRouter>
   );
 });
 
 it("matches snapshot", function () {
-  const { asFragment } = render(
-    <MemoryRouter>
-      <LandingPage />
-    </MemoryRouter>
-  );
+  const { asFragment } = render(<Dashboard />);
   expect(asFragment()).toMatchSnapshot();
 });
