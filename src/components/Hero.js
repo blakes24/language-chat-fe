@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "0 auto",
     height: "50vh",
+    minHeight: "325px",
     padding: 0,
     marginBottom: "2rem",
     backgroundImage: "url('/world-lg.jpg')",
