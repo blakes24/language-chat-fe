@@ -4,31 +4,105 @@ import Container from "@material-ui/core/Container";
 import ChatApi from "../helpers/api";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles({
   root: {
-    margin: "1rem",
+    marginTop: "1.5rem",
+    marginBottom: ".5rem",
+  },
+  formControl: {
+    marginBottom: ".5rem",
+    minWidth: 240,
+  },
+  formContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  err: {
+    textAlign: "center"
   }
 });
 
 function Dashboard() {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [errors, setErrors] = useState(null)
+
+  const languages = [
+    { label: "Any", value: "" },
+    { label: "Arabic", value: "ar" },
+    { label: "Chinese", value: "zh" },
+    { label: "English", value: "en" },
+    { label: "French", value: "fr" },
+    { label: "German", value: "de" },
+    { label: "Hindi", value: "hi" },
+    { label: "Indonesian", value: "id" },
+    { label: "Italian", value: "it" },
+    { label: "Japanese", value: "ja" },
+    { label: "Korean", value: "ko" },
+    { label: "Portuguese", value: "pt" },
+    { label: "Russian", value: "ru" },
+    { label: "Spanish", value: "es" },
+  ];
+
+  const handleChange = (event) => {
+    setFilter(event.target.value);
+  };
 
   useEffect(() => {
+    setErrors(null);
     async function getUsers() {
-      const res = await ChatApi.getAllUsers();
-      setUsers(res);
+      try {
+         const res = await ChatApi.getAllUsers(filter);
+         setUsers(res);
+      } catch (err) {
+        setErrors(err)
+        setUsers([])
+      }
+      
     }
     getUsers();
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
-      <Typography variant="h6" component="h1" align='center' className={classes.root}>
+      <Typography
+        variant="h6"
+        component="h1"
+        align="center"
+        className={classes.root}
+      >
         Find a partner and start chatting!
       </Typography>
-      {users.length && <UserList users={users} />}
+      <Container className={classes.formContainer}>
+        <FormControl
+          variant="outlined"
+          margin="dense"
+          className={classes.formControl}
+        >
+          <InputLabel id="language">Show users who speak...</InputLabel>
+          <Select
+            labelId="language"
+            id="language"
+            value={filter}
+            onChange={handleChange}
+            label="Show users who speak..."
+          >
+            {languages.map((lang) => (
+              <MenuItem value={lang.value} key={lang.value || 1}>
+                {lang.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Container>
+      {errors && errors.map(err => <p className={classes.err}>{err}</p>) }
+      {users.length > 0 && <UserList users={users} />}
     </Container>
   );
 }

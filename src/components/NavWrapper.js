@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -84,7 +84,7 @@ function HideOnScroll({ children }) {
 function NavWrapper({ window, children }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { user, setToken } = useContext(UserContext);
 
   function logout() {
@@ -94,6 +94,10 @@ function NavWrapper({ window, children }) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const closeDrawer = () => {
+    setMobileOpen(false);
+  };;
 
   const drawer = (
     <div>
@@ -106,6 +110,7 @@ function NavWrapper({ window, children }) {
           to="/"
           key={"home"}
           className={classes.listItem}
+          onClick={closeDrawer}
         >
           <ListItemIcon>
             <HomeIcon color="secondary" />
@@ -118,6 +123,7 @@ function NavWrapper({ window, children }) {
           to="/partners"
           key={"partners"}
           className={classes.listItem}
+          onClick={closeDrawer}
         >
           <ListItemIcon>
             <PeopleIcon color="secondary" />
@@ -130,6 +136,7 @@ function NavWrapper({ window, children }) {
           to="/messages"
           key={"messages"}
           className={classes.listItem}
+          onClick={closeDrawer}
         >
           <ListItemIcon>
             <MailIcon color="secondary" />
@@ -142,6 +149,7 @@ function NavWrapper({ window, children }) {
           to="/profile"
           key={"profile"}
           className={classes.listItem}
+          onClick={closeDrawer}
         >
           <ListItemIcon>
             <AccountCircleIcon color="secondary" />

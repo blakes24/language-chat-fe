@@ -12,11 +12,11 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "80vh",
+    height: "90vh",
+    minHeight: "500px",
   },
   card: {
     padding: "1rem",
-    marginTop: "2rem",
   },
 });
 
