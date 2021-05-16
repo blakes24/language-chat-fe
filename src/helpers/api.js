@@ -13,7 +13,6 @@ class ChatApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${ChatApi.token}` };
     const params = method === "get" ? data : {};
-
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
@@ -22,6 +21,7 @@ class ChatApi {
         ? err.response.data.error.message
         : "Server error: try again later";
       throw Array.isArray(message) ? message : [message];
+      // throw new Error(message);
     }
   }
 

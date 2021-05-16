@@ -88,6 +88,7 @@ function NavWrapper({ window, children }) {
   const { user, setToken } = useContext(UserContext);
 
   function logout() {
+    setMobileOpen(false);
     setToken(null);
   }
 
@@ -97,7 +98,7 @@ function NavWrapper({ window, children }) {
 
   const closeDrawer = () => {
     setMobileOpen(false);
-  };;
+  };
 
   const drawer = (
     <div>

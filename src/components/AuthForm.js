@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import SocialButton from "./SocialButton";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "./Loading";
 
 const validate = (values) => {
   const errors = {};
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -66,7 +68,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
+function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook, handleFail }) {
+  const[loading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -74,22 +78,21 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
     },
     validate,
     onSubmit: async (values) => {
+      setLoading(true);
       try {
         await handleSubmit(values);
       } catch (err) {
+        setLoading(false);
         formik.errors.password = err;
       }
     },
   });
 
-  const handleSocialLoginFailure = (err) => {
-    console.error(err);
-  };
-
   const classes = useStyles();
 
   return (
     <>
+      {loading && <Loading />}
       <form
         className={classes.root}
         autoComplete="off"
@@ -148,7 +151,7 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
           provider="facebook"
           appId={process.env.REACT_APP_FACEBOOK_APP_ID}
           onLoginSuccess={handleFacebook}
-          onLoginFailure={handleSocialLoginFailure}
+          onLoginFailure={handleFail}
         >
           <FacebookIcon className={classes.icon} />
           {` ${text} with Facebook`}
@@ -159,7 +162,7 @@ function AuthForm({ text, handleSubmit, handleGoogle, handleFacebook }) {
           provider="google"
           appId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onLoginSuccess={handleGoogle}
-          onLoginFailure={handleSocialLoginFailure}
+          onLoginFailure={handleFail}
         >
           <FontAwesomeIcon className={classes.icon} icon={faGoogle} />{" "}
           {`${text} with Google`}

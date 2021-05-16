@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import UserList from "./UserList";
 import Container from "@material-ui/core/Container";
-import ChatApi from "../helpers/api";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllUsers } from "../store/usersSlice";
+import Loading from "./Loading";
 
 const useStyles = makeStyles({
   root: {
@@ -29,9 +31,11 @@ const useStyles = makeStyles({
 
 function Dashboard() {
   const classes = useStyles();
-  const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
-  const [errors, setErrors] = useState(null)
+  const users = useSelector((state) => state.users.items);
+  const loading = useSelector((state) => state.users.loading);
+  const error = useSelector((state) => state.users.error);
+  const dispatch = useDispatch();
 
   const languages = [
     { label: "Any", value: "" },
@@ -55,19 +59,15 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    setErrors(null);
     async function getUsers() {
       try {
-         const res = await ChatApi.getAllUsers(filter);
-         setUsers(res);
+        await dispatch(fetchAllUsers(filter));
       } catch (err) {
-        setErrors(err)
-        setUsers([])
+        console.error(err);
       }
-      
     }
     getUsers();
-  }, [filter]);
+  }, [filter, dispatch]);
 
   return (
     <Container>
@@ -101,7 +101,8 @@ function Dashboard() {
           </Select>
         </FormControl>
       </Container>
-      {errors && errors.map(err => <p className={classes.err}>{err}</p>) }
+      {loading === "pending" && <Loading />}
+      {error && error.map((err) => <p className={classes.err}>{err}</p>)}
       {users.length > 0 && <UserList users={users} />}
     </Container>
   );

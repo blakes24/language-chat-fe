@@ -12,22 +12,27 @@ import useLocalStorage from "./helpers/useLocalStorage";
 import ChatApi from "./helpers/api";
 import jwtDecode from "jwt-decode";
 import NavWrapper from "./components/NavWrapper";
+import Loading from "./components/Loading";
 
 function Routes() {
   const [token, setToken] = useLocalStorage("token", "");
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // if token is present get user details, if not remove user from state
   useEffect(() => {
     async function getUser() {
+      setLoading(true);
       if (!token) {
         setUser(null);
+        setLoading(false);
       } else {
         try {
           ChatApi.token = token;
           const userId = jwtDecode(token).userId;
           const user = await ChatApi.getUser(userId);
           setUser(user);
+          setLoading(false);
         } catch (err) {
           console.error(err);
         }
@@ -41,7 +46,7 @@ function Routes() {
       <NavWrapper>
         <Switch>
           <Route exact path="/">
-            {user ? <Dashboard /> : <LandingPage />}
+            {loading ? <Loading /> : user ? <Dashboard /> : <LandingPage />}
           </Route>
           <Route exact path="/profile">
             {user ? <Profile /> : <Redirect to="/" />}
