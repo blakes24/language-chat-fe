@@ -3,17 +3,17 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-13 MuiContainer-maxWidthSm"
+    class="MuiContainer-root makeStyles-root-14 MuiContainer-maxWidthSm"
   >
     <div
-      class="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiCard-root makeStyles-card-15 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <h1>
         Log In
       </h1>
       <form
         autocomplete="off"
-        class="makeStyles-root-15"
+        class="makeStyles-root-17"
       >
         <div
           class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -40,10 +40,10 @@ exports[`matches snapshot 1`] = `
             />
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-23 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-23"
+                class="PrivateNotchedOutline-legendLabelled-25"
               >
                 <span>
                   Email
@@ -78,10 +78,10 @@ exports[`matches snapshot 1`] = `
             />
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-23 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-23"
+                class="PrivateNotchedOutline-legendLabelled-25"
               >
                 <span>
                   Password
@@ -107,12 +107,12 @@ exports[`matches snapshot 1`] = `
         </button>
       </form>
       <h4
-        class="makeStyles-divider-17"
+        class="makeStyles-divider-19"
       >
         OR
       </h4>
       <div
-        class="makeStyles-root-15"
+        class="makeStyles-root-17"
       />
     </div>
   </div>
