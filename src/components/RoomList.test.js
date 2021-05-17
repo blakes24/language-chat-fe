@@ -1,11 +1,14 @@
 import { render } from "@testing-library/react";
 import { UserProvider } from "../helpers/testUser";
 import { MemoryRouter } from "react-router-dom";
-import UserList from "./UserList";
+import store from "../store/root";
+import { Provider } from "react-redux";
+import RoomList from "./RoomList";
 
-const users = [
-  
+const rooms = [
   {
+    id: "1-2",
+    partner: {
       id: 1,
       name: "Brady",
       bio: "Eos nobis autem sint ducimus illo.",
@@ -25,26 +28,30 @@ const users = [
         },
       ],
     },
-,
+  },
 ];
 
 test("renders without crashing", () => {
   render(
-    <MemoryRouter>
-      <UserProvider>
-        <UserList users={users} />
-      </UserProvider>
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <UserProvider>
+          <RoomList rooms={rooms} />
+        </UserProvider>
+      </MemoryRouter>
+    </Provider>
   );
 });
 
 it("matches snapshot", function () {
   const { asFragment } = render(
-    <MemoryRouter>
-      <UserProvider>
-        <UserList users={users} />
-      </UserProvider>
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <UserProvider>
+          <RoomList rooms={rooms} />
+        </UserProvider>
+      </MemoryRouter>
+    </Provider>
   );
   expect(asFragment()).toMatchSnapshot();
 });

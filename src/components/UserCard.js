@@ -7,6 +7,9 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ChatIcon from "@material-ui/icons/Chat";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { Link } from "react-router-dom";
+import UserContext from "../helpers/UserContext";
+import { useContext } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -51,22 +54,28 @@ const useStyles = makeStyles({
   },
 });
 
-function UserCard({ user }) {
+function UserCard({ cardUser }) {
   const classes = useStyles();
+  const { user } = useContext(UserContext);
+  const path =
+    user.id < cardUser.id
+      ? `/chats/${user.id}-${cardUser.id}`
+      : `/chats/${cardUser.id}-${user.id}`;
+
   return (
     <Card className={classes.root}>
       <CardContent>
         <div className={classes.top}>
           <Avatar
-            alt={user.name}
-            src={user.imageUrl}
+            alt={cardUser.name}
+            src={cardUser.imageUrl}
             className={classes.avatar}
             variant="rounded"
           />
           <div className={classes.details}>
             <div className={classes.items}>
               <Typography variant="h6" component="h2">
-                {user.name}{" "}
+                {cardUser.name}{" "}
               </Typography>
               <div>
                 <IconButton
@@ -77,9 +86,12 @@ function UserCard({ user }) {
                   <PersonAddIcon />
                 </IconButton>
                 <IconButton
+                  component={Link}
                   color="secondary"
-                  aria-label="send a message"
+                  aria-label="chat"
                   className={classes.btn}
+                  to={path}
+                  role="link"
                 >
                   <ChatIcon />
                 </IconButton>
@@ -88,7 +100,7 @@ function UserCard({ user }) {
 
             <div className={classes.langs}>
               <div className={classes.langSpace}>
-                {user.speaks[0].language}{" "}
+                {cardUser.speaks[0].language}{" "}
                 <LinearProgress
                   variant="determinate"
                   value={100}
@@ -96,7 +108,7 @@ function UserCard({ user }) {
                 />
               </div>
 
-              {user.learning.map((lang) => (
+              {cardUser.learning.map((lang) => (
                 <div key={lang.code}>
                   {lang.language}{" "}
                   <LinearProgress
@@ -110,7 +122,7 @@ function UserCard({ user }) {
           </div>
         </div>
         <Typography className={classes.bio} color="textSecondary">
-          {user.bio}
+          {cardUser.bio}
         </Typography>
       </CardContent>
     </Card>
