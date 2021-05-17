@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/LandingPage";
 import Profile from "./components/Profile";
 import Partners from "./components/Partners";
-import Messages from "./components/Messages";
+import Chats from "./components/Chats";
 import Signup from "./components/Signup";
 import UserContext from "./helpers/UserContext";
 import useLocalStorage from "./helpers/useLocalStorage";
@@ -54,8 +54,12 @@ function Routes() {
           <Route exact path="/partners">
             {user ? <Partners /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/messages">
-            {user ? <Messages /> : <Redirect to="/" />}
+
+          <Route exact path="/chats/:roomId">
+            {user ? <Chats /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/chats">
+            {user ? <Chats /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/signup">
             <Signup />

@@ -1,7 +1,9 @@
 import { render } from "@testing-library/react";
-import UserList from "./UserList";
+import UserCard from "./UserCard";
+import { UserProvider } from "../helpers/testUser";
+import { MemoryRouter } from "react-router-dom";
 
-const users = [
+const user = 
   {
     id: 1,
     name: "Brady",
@@ -21,14 +23,25 @@ const users = [
         level: "2",
       },
     ],
-  },
-];
+  }
 
 test("renders without crashing", () => {
-  render(<UserList users={users} />);
+  render(
+    <MemoryRouter>
+      <UserProvider>
+        <UserCard cardUser={user} key={user.id} />)
+      </UserProvider>
+    </MemoryRouter>
+  );
 });
 
 it("matches snapshot", function () {
-  const { asFragment } = render(<UserList users={users} />);
+  const { asFragment } = render(
+    <MemoryRouter>
+      <UserProvider>
+        <UserCard cardUser={user} key={user.id} />)
+      </UserProvider>
+    </MemoryRouter>
+  );
   expect(asFragment()).toMatchSnapshot();
 });

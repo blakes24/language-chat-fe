@@ -9,18 +9,18 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import UserContext from "../helpers/UserContext";
 import HomeIcon from "@material-ui/icons/Home";
 import PeopleIcon from "@material-ui/icons/People";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ChatIcon from "@material-ui/icons/Chat";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import Footer from "./Footer";
@@ -87,6 +87,8 @@ function NavWrapper({ window, children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, setToken } = useContext(UserContext);
 
+  let match = useRouteMatch("/chats");
+
   function logout() {
     setMobileOpen(false);
     setToken(null);
@@ -134,15 +136,15 @@ function NavWrapper({ window, children }) {
         <ListItem
           button
           component={RouterLink}
-          to="/messages"
-          key={"messages"}
+          to="/chats"
+          key={"chats"}
           className={classes.listItem}
           onClick={closeDrawer}
         >
           <ListItemIcon>
-            <MailIcon color="secondary" />
+            <ChatIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText primary={"Messages"} />
+          <ListItemText primary={"Chats"} />
         </ListItem>
         <ListItem
           button
@@ -258,7 +260,7 @@ function NavWrapper({ window, children }) {
           {children}
         </main>
       </div>
-      <Footer />
+      {!match && <Footer />}
     </>
   );
 }

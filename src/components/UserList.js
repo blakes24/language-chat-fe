@@ -16,7 +16,7 @@ function UserList({ users }) {
   return (
     <Container className={classes.root}>
       {users.map((user) => (
-        <UserCard user={user} key={user.id} />
+        <UserCard cardUser={user} key={user.id} />
       ))}
     </Container>
   );

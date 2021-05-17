@@ -21,7 +21,6 @@ class ChatApi {
         ? err.response.data.error.message
         : "Server error: try again later";
       throw Array.isArray(message) ? message : [message];
-      // throw new Error(message);
     }
   }
 
@@ -40,17 +39,14 @@ class ChatApi {
     return res.user;
   }
 
-  /** Get all users, filter by speaks or learning language */
-
-  static async getAllUsers(filters) {
-    let res = await this.request(`users`, filters);
-    return res.users;
-  }
+  /** Verifies that the social token provided is valid */
 
   static async verify(token) {
     let res = await this.request(`auth/validate`, token, "post");
     return res;
   }
+
+  /** Get gets token to authenticate future requests to api */
 
   static async getToken(data) {
     let res = data.email
@@ -58,6 +54,36 @@ class ChatApi {
       : await this.request(`auth/social-token`, data, "post");
     this.token = res.token;
     return res.token;
+  }
+
+  /** Get all users, filter by speaks or learning language */
+
+  static async getAllUsers(filters) {
+    let res = await this.request(`users`, filters);
+    return res.users;
+  }
+
+  /** Get a users chat rooms, filter by chat partner */
+
+  static async getRooms({ userId, partnerId }) {
+    let queryParams = { partner: partnerId };
+    let res = await this.request(`users/${userId}/rooms`, queryParams);
+    return res;
+  }
+
+  /** Creates a chat room for two users */
+
+  static async createRoom(users) {
+    let res = await this.request(`rooms`, users, "post");
+    return res;
+  }
+
+  /** Gets messages, filter by room */
+
+  static async getMessages(roomId) {
+    let queryParams = { room: roomId };
+    let res = await this.request(`rooms`, queryParams);
+    return res;
   }
 }
 
