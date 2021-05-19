@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     height: "calc(100% - 56px)",
-    width: "100%",
     [theme.breakpoints.up("sm")]: {
       height: "calc(100% - 64px)",
     },
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   chatContainer: {
     padding: 0,
     margin: 0,
-    width:  "100%",
+    width: "100%",
   },
 }));
 
@@ -89,7 +88,7 @@ function Chats() {
   return (
     <Container maxWidth="xl" className={classes.root}>
       <div className={classes.chat}>
-        <div square className={classes.list}>
+        <div className={classes.list}>
           {rooms.length > 0 && <RoomList rooms={rooms} />}
         </div>
         <Container className={classes.chatContainer}>
@@ -102,7 +101,7 @@ function Chats() {
             {currentRoom ? currentRoom.partner.name : "Chat"}
           </Typography>{" "}
           <Divider />
-          {error && error.map((err) => <p>{err}</p>)}
+          {error && Array.isArray(error) && error.map((err) => <p>{err}</p>)}
           {currentRoom && <ChatRoom />}
         </Container>
       </div>

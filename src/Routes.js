@@ -34,8 +34,9 @@ function Routes() {
           setUser(user);
           setLoading(false);
         } catch (err) {
-          console.error(err);
           setToken(null);
+          setLoading(false);
+          console.error(err);
         }
       }
     }

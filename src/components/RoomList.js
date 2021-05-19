@@ -15,13 +15,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     paddingBottom: 0,
-    paddingTop: 8,
+    paddingTop: 9,
   },
   item: {
     padding: "8px 10px",
   },
   avatar: {
     marginTop: ".2rem",
+  },
+  icon: {
+    paddingLeft: ".1rem",
   },
   letter: {
     backgroundColor: theme.palette.primary.main,
@@ -39,7 +42,7 @@ function RoomList({ rooms }) {
   return (
     <List className={classes.root}>
       <ListItem>
-        <ListItemIcon className={classes.avatar}>
+        <ListItemIcon className={classes.icon}>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Chats" />

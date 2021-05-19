@@ -28,6 +28,7 @@ import Footer from "./Footer";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    paddingBottom: "env(safe-area-inset-bottom)",
   },
   drawer: {
     [theme.breakpoints.up("md")]: {
@@ -179,7 +180,7 @@ function NavWrapper({ window, children }) {
       <div className={classes.root}>
         <CssBaseline />
         <HideOnScroll>
-          <AppBar position="fixed" className={classes.appBar}>
+          <AppBar position="fixed" elevation={0} className={classes.appBar}>
             <Toolbar>
               {user && (
                 <IconButton

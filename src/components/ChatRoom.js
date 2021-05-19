@@ -26,12 +26,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: ".5rem 1rem",
     overflowY: "scroll",
+    height: 0,
   },
   send: {
     display: "flex",
     padding: "1rem",
     backgroundColor: theme.palette.secondary.light,
     margin: 0,
+    borderRight: "1px solid lightGray",
   },
   input: {
     flexGrow: 1,
@@ -57,9 +59,11 @@ function ChatRoom() {
   const partner = currentRoom && currentRoom.partner;
   const socketRef = useRef();
   const messagesEndRef = useRef(null);
+  const [focus, setFocus] = useState(true);
 
   useEffect(() => {
-    if (currentRoom) {
+    if (currentRoom && focus) {
+      // get messages and connect to socket if window is in focus
       dispatch(fetchMessages(currentRoom.id));
 
       socketRef.current = io(BASE_URL);
@@ -72,7 +76,7 @@ function ChatRoom() {
         socketRef.current.disconnect();
       };
     }
-  }, [currentRoom, dispatch]);
+  }, [currentRoom, dispatch, focus]);
 
   function sendMessage(e) {
     e.preventDefault();
@@ -98,9 +102,31 @@ function ChatRoom() {
     scrollToBottom();
   }, [messages]);
 
+  const onFocus = () => {
+    setFocus(true);
+  };
+  const onBlur = () => {
+    setFocus(false);
+  };
+
+  useEffect(() => {
+    // add listener to check when window comes back ito focus so data and socket connection can be refreshed
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
+    };
+  }, []);
+
   return (
     <Container className={classes.root}>
-      <Paper square className={classes.messages}>
+      <Paper
+        square
+        variant="outlined"
+        elevation={0}
+        className={classes.messages}
+      >
         {messages.map((msg) => {
           if (msg.from === partner.id) {
             return <ChatBubble msg={msg} user={partner} key={msg.id} />;
@@ -119,7 +145,11 @@ function ChatRoom() {
           onChange={handleChange}
           className={classes.input}
         />
-        <IconButton type="submit" className={classes.btn} disabled={!message}>
+        <IconButton
+          type="submit"
+          className={classes.btn}
+          disabled={!message.trim()}
+        >
           <SendIcon />
         </IconButton>
       </form>
