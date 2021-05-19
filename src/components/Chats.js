@@ -1,25 +1,29 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRooms, addRoom, setCurrentRoom } from "../store/roomSlice";
 import { useParams } from "react-router-dom";
 import ChatApi from "../helpers/api";
 import { useEffect, useState } from "react";
-import { Container, Divider, Paper } from "@material-ui/core";
+import { Container, Divider, Typography } from "@material-ui/core";
 import UserContext from "../helpers/UserContext";
 import { useContext } from "react";
 import RoomList from "./RoomList";
+import ChatRoom from "./ChatRoom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 0,
     margin: 0,
-    paddingTop: ".1rem",
     height: "calc(100% - 56px)",
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      height: "calc(100% - 64px)",
+    },
   },
   list: {
     width: 69,
     paddingBottom: 0,
+    marginBottom: 0,
     overflowX: "hidden",
     overflowY: "scroll",
     borderRight: "1px solid lightGray",
@@ -27,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "calc(100vh - 56px)",
     flexFlow: "column",
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       width: "250px",
       maxHeight: "calc(100vh - 64px)",
     },
@@ -38,7 +42,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   title: {
-    padding: ".4rem 0",
+    padding: ".5rem 0",
+  },
+  chatContainer: {
+    padding: 0,
+    margin: 0,
+    width:  "100%",
   },
 }));
 
@@ -78,12 +87,12 @@ function Chats() {
   }, [user, roomId, dispatch]);
 
   return (
-    <Container className={classes.root}>
+    <Container maxWidth="xl" className={classes.root}>
       <div className={classes.chat}>
-        <Paper square className={classes.list}>
+        <div square className={classes.list}>
           {rooms.length > 0 && <RoomList rooms={rooms} />}
-        </Paper>
-        <Container className={classes.root}>
+        </div>
+        <Container className={classes.chatContainer}>
           <Typography
             className={classes.title}
             component={"h1"}
@@ -93,7 +102,8 @@ function Chats() {
             {currentRoom ? currentRoom.partner.name : "Chat"}
           </Typography>{" "}
           <Divider />
-          {error && error.map((err) => <p>err</p>)}
+          {error && error.map((err) => <p>{err}</p>)}
+          {currentRoom && <ChatRoom />}
         </Container>
       </div>
     </Container>

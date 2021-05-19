@@ -3,13 +3,13 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <ul
-    class="MuiList-root makeStyles-root-6 MuiList-padding"
+    class="MuiList-root makeStyles-root-7 MuiList-padding"
   >
     <li
       class="MuiListItem-root MuiListItem-gutters"
     >
       <div
-        class="MuiListItemIcon-root makeStyles-avatar-8"
+        class="MuiListItemIcon-root makeStyles-avatar-9"
       >
         <svg
           aria-hidden="true"
@@ -28,7 +28,7 @@ exports[`matches snapshot 1`] = `
         <span
           class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
         >
-          Conversations
+          Chats
         </span>
       </div>
     </li>
@@ -38,19 +38,19 @@ exports[`matches snapshot 1`] = `
     />
     <a
       aria-disabled="false"
-      class="MuiButtonBase-root MuiListItem-root makeStyles-item-7 MuiListItem-gutters MuiListItem-button MuiListItem-alignItemsFlexStart"
+      class="MuiButtonBase-root MuiListItem-root makeStyles-item-8 MuiListItem-gutters MuiListItem-button MuiListItem-alignItemsFlexStart"
       href="/chats/1-2"
       role="button"
       tabindex="0"
     >
       <div
-        class="MuiListItemAvatar-root makeStyles-avatar-8 MuiListItemAvatar-alignItemsFlexStart"
+        class="MuiListItemAvatar-root makeStyles-avatar-9 MuiListItemAvatar-alignItemsFlexStart"
       >
         <span
           class="MuiBadge-root"
         >
           <div
-            class="MuiAvatar-root MuiAvatar-circle"
+            class="MuiAvatar-root MuiAvatar-circle makeStyles-letter-10"
           >
             <img
               alt="Brady"
@@ -59,7 +59,7 @@ exports[`matches snapshot 1`] = `
             />
           </div>
           <span
-            class="MuiBadge-badge makeStyles-badgeActive-9 MuiBadge-anchorOriginTopRightRectangle MuiBadge-dot"
+            class="MuiBadge-badge makeStyles-badgeActive-11 MuiBadge-anchorOriginTopRightRectangle MuiBadge-dot"
           />
         </span>
       </div>

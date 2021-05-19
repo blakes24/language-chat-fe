@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+import { BASE_URL } from "../config";
 
 /** API Class: methods used to connect to the API. */
 
@@ -71,10 +70,10 @@ class ChatApi {
     return res;
   }
 
-  /** Creates a chat room for two users */
+  /** Creates a chat room for two users data = {user1, user2} */
 
-  static async createRoom(users) {
-    let res = await this.request(`rooms`, users, "post");
+  static async createRoom(data) {
+    let res = await this.request(`rooms`, data, "post");
     return res;
   }
 
@@ -82,8 +81,8 @@ class ChatApi {
 
   static async getMessages(roomId) {
     let queryParams = { room: roomId };
-    let res = await this.request(`rooms`, queryParams);
-    return res;
+    let res = await this.request(`messages`, queryParams);
+    return res.messages;
   }
 }
 
