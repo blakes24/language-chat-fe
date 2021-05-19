@@ -35,11 +35,12 @@ function Routes() {
           setLoading(false);
         } catch (err) {
           console.error(err);
+          setToken(null);
         }
       }
     }
     getUser();
-  }, [token]);
+  }, [token, setToken]);
 
   return (
     <UserContext.Provider value={{ user, setToken }}>
@@ -54,7 +55,6 @@ function Routes() {
           <Route exact path="/partners">
             {user ? <Partners /> : <Redirect to="/" />}
           </Route>
-
           <Route exact path="/chats/:roomId">
             {user ? <Chats /> : <Redirect to="/" />}
           </Route>

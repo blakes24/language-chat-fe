@@ -15,13 +15,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     paddingBottom: 0,
-    paddingTop: 7,
+    paddingTop: 8,
   },
   item: {
     padding: "8px 10px",
   },
   avatar: {
-    marginTop: ".1rem",
+    marginTop: ".2rem",
+  },
+  letter: {
+    backgroundColor: theme.palette.primary.main,
   },
   badgeActive: {
     backgroundColor: theme.palette.success.main,
@@ -39,7 +42,7 @@ function RoomList({ rooms }) {
         <ListItemIcon className={classes.avatar}>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Conversations" />
+        <ListItemText primary="Chats" />
       </ListItem>
       <Divider component="li" />
       {rooms.map((room) => (
@@ -62,7 +65,11 @@ function RoomList({ rooms }) {
                     : { badge: classes.badgeAway }
                 }
               >
-                <Avatar alt={room.partner.name} src={room.partner.imageUrl} />
+                <Avatar
+                  alt={room.partner.name}
+                  src={room.partner.imageUrl || "letter"}
+                  className={classes.letter}
+                />
               </Badge>
             </ListItemAvatar>
             <ListItemText primary={room.partner.name} />

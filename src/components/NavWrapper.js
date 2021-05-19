@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     [theme.breakpoints.up("md")]: {
-      width: 280,
+      width: 220,
       flexShrink: 0,
     },
   },
@@ -48,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: 220,
-    [theme.breakpoints.up("md")]: {
-      width: 280,
-    },
     backgroundColor: theme.palette.secondary.light,
   },
   content: {

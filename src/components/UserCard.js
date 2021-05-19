@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import UserContext from "../helpers/UserContext";
 import { useContext } from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
     textAlign: "left",
@@ -25,6 +25,7 @@ const useStyles = makeStyles({
     width: "65px",
     height: "65px",
     marginRight: "1rem",
+    backgroundColor: theme.palette.primary.main,
   },
   top: {
     display: "flex",
@@ -52,7 +53,7 @@ const useStyles = makeStyles({
   btn: {
     padding: ".5rem",
   },
-});
+}));
 
 function UserCard({ cardUser }) {
   const classes = useStyles();
@@ -68,7 +69,7 @@ function UserCard({ cardUser }) {
         <div className={classes.top}>
           <Avatar
             alt={cardUser.name}
-            src={cardUser.imageUrl}
+            src={cardUser.imageUrl || "letter"}
             className={classes.avatar}
             variant="rounded"
           />
