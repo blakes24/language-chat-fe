@@ -6,7 +6,7 @@ exports[`matches snapshot 1`] = `
     class="makeStyles-root-14"
   >
     <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-16 mui-fixed MuiPaper-elevation4"
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-16 mui-fixed MuiPaper-elevation0"
     >
       <div
         class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"

@@ -6,7 +6,7 @@ exports[`matches snapshot 1`] = `
     class="MuiContainer-root makeStyles-root-11 MuiContainer-maxWidthLg"
   >
     <div
-      class="MuiPaper-root makeStyles-messages-12 MuiPaper-elevation1"
+      class="MuiPaper-root makeStyles-messages-12 MuiPaper-outlined"
     >
       <div />
     </div>
