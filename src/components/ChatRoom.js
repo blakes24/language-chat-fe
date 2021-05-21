@@ -80,14 +80,16 @@ function ChatRoom() {
 
   function sendMessage(e) {
     e.preventDefault();
-    const messageObject = {
-      body: message,
-      to: partner.id,
-      from: user.id,
-      roomId: currentRoom.id,
-    };
-    setMessage("");
-    socketRef.current.emit("send message", messageObject);
+    if  (message.trim()) {
+      const messageObject = {
+        body: message,
+        to: partner.id,
+        from: user.id,
+        roomId: currentRoom.id,
+      };
+      setMessage("");
+      socketRef.current.emit("send message", messageObject);
+    }
   }
 
   function handleChange(e) {
