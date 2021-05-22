@@ -84,6 +84,27 @@ class ChatApi {
     let res = await this.request(`messages`, queryParams);
     return res.messages;
   }
+
+  /** Update user info. */
+
+  static async updateUser(id, data) {
+    let res = await this.request(`users/${id}`, data, "patch");
+    return res.user;
+  }
+
+  /** Update language(speaks). */
+
+  static async updateSpeaks(id, data) {
+    let res = await this.request(`languages/speaks/${id}`, data, "patch");
+    return res.language;
+  }
+
+  /** Update language(learning). */
+
+  static async updateLearning(id, data) {
+    let res = await this.request(`languages/learning/${id}`, data, "patch");
+    return res.language;
+  }
 }
 
 export default ChatApi;
