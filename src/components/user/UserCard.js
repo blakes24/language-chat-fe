@@ -1,3 +1,4 @@
+import {useState} from "react"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,6 +10,9 @@ import ChatIcon from "@material-ui/icons/Chat";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ChatApi from "../../helpers/api"
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,13 +58,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UserCard({ cardUser }) {
+function UserCard({ cardUser, partner }) {
   const classes = useStyles();
   const user = useSelector((state) => state.users.current);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [error, setError] = useState(null);
   const path =
     user.id < cardUser.id
       ? `/chats/${user.id}-${cardUser.id}`
       : `/chats/${cardUser.id}-${user.id}`;
+
+  const handleClose = (event) => {
+    setToastOpen(false);
+  };
+
+  async function handleAddPartner(){
+    try {
+      await ChatApi.addPartner(user.id, {partnerId: cardUser.id})
+      setToastOpen(true)
+    } catch (err) {
+      const msg = Array.isArray(err) ? err[0] : err.message
+      setError(msg)
+      setToastOpen(true);
+      console.error(err)
+    }
+  }
 
   return (
     <Card className={classes.root}>
@@ -78,13 +100,16 @@ function UserCard({ cardUser }) {
                 {cardUser.name}{" "}
               </Typography>
               <div>
-                <IconButton
-                  color="secondary"
-                  aria-label="follow"
-                  className={classes.btn}
-                >
-                  <PersonAddIcon />
-                </IconButton>
+                {!partner && (
+                  <IconButton
+                    color="secondary"
+                    aria-label="add partner"
+                    className={classes.btn}
+                    onClick={handleAddPartner}
+                  >
+                    <PersonAddIcon />
+                  </IconButton>
+                )}
                 <IconButton
                   component={Link}
                   color="secondary"
@@ -125,6 +150,26 @@ function UserCard({ cardUser }) {
           {cardUser.bio}
         </Typography>
       </CardContent>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={toastOpen}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message={error ? error : "Partner added!"}
+        action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+        }
+      />
     </Card>
   );
 }

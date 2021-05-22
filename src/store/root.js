@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./usersSlice";
 import roomReducer from "./roomSlice";
 import messageReducer from "./messageSlice";
+import partnerReducer from "./partnerSlice";
 
 export default configureStore({
   reducer: {
     users: usersReducer,
     rooms: roomReducer,
     messages: messageReducer,
+    partners: partnerReducer,
   },
 });

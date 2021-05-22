@@ -105,6 +105,20 @@ class ChatApi {
     let res = await this.request(`languages/learning/${id}`, data, "patch");
     return res.language;
   }
+
+  /** Get a users partners */
+
+  static async getPartners(userId) {
+    let res = await this.request(`users/${userId}/partners`);
+    return res.partners;
+  }
+
+  /** Adds a partner */
+
+  static async addPartner(userId, data) {
+    let res = await this.request(`users/${userId}/partners`, data, "post");
+    return res;
+  }
 }
 
 export default ChatApi;

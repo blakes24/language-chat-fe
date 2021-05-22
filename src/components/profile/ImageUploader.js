@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser } from "../../store/usersSlice";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../config";
+import Loading from "../Loading";
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +46,7 @@ function ImageUploader({ imageUrl, userId }) {
   const fileSelect = useRef(null);
   const [image, setImage] = useState(currentImage);
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   async function handleFileSelect() {
@@ -63,6 +65,7 @@ function ImageUploader({ imageUrl, userId }) {
 
   // Upload file to Cloudinary
   function handleUpload() {
+    setLoading(true);
     const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
     const xhr = new XMLHttpRequest();
     const fd = new FormData();
@@ -77,6 +80,7 @@ function ImageUploader({ imageUrl, userId }) {
         setImage(url);
         setFile(null);
         dispatch(updateCurrentUser({ imageUrl: url, id: userId }));
+        setLoading(false);
       }
     };
 
@@ -92,6 +96,7 @@ function ImageUploader({ imageUrl, userId }) {
   return (
     <div className={classes.root}>
       <div className={classes.imgContainer}>
+        {loading && <Loading />}
         <img src={image} alt="avatar" className={classes.img} />
       </div>
 
