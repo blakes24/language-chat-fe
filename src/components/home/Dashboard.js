@@ -59,9 +59,9 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    async function getUsers() {
+    function getUsers() {
       try {
-        await dispatch(fetchAllUsers(filter));
+        dispatch(fetchAllUsers(filter));
       } catch (err) {
         console.error(err);
       }

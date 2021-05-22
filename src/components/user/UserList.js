@@ -11,12 +11,12 @@ const useStyles = makeStyles({
   },
 });
 
-function UserList({ users }) {
+function UserList({ users, partner }) {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
       {users.map((user) => (
-        <UserCard cardUser={user} key={user.id} />
+        <UserCard cardUser={user} key={user.id} partner={partner} />
       ))}
     </Container>
   );

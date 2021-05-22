@@ -35,6 +35,7 @@ const initialState = {
   },
   rooms: { items: [], current: null, loading: "idle", error: null },
   messages: { items: [], loading: "idle", error: null },
+  partners: { items: [], loading: "idle", error: null },
 };
 
 export const store = mockStore(initialState);

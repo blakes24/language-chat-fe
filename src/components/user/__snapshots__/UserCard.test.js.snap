@@ -33,7 +33,7 @@ exports[`matches snapshot 1`] = `
             </h2>
             <div>
               <button
-                aria-label="follow"
+                aria-label="add partner"
                 class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-20 MuiIconButton-colorSecondary"
                 tabindex="0"
                 type="button"
