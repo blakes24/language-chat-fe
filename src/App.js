@@ -1,7 +1,7 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import Routes from "./Routes";
+import Routes from "./components/navigation/Routes";
 import { BrowserRouter } from "react-router-dom";
 import { green, red } from "@material-ui/core/colors";
 
