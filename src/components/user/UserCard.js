@@ -21,14 +21,16 @@ const useStyles = makeStyles((theme) => ({
     margin: ".5rem",
   },
   bio: {
-    fontSize: 14,
+    fontSize: "1rem",
     marginTop: ".5rem",
+    color: theme.palette.secondary.main,
   },
   avatar: {
     width: "65px",
     height: "65px",
     marginRight: "1rem",
     backgroundColor: theme.palette.primary.main,
+    textDecoration: "none",
   },
   top: {
     display: "flex",
@@ -93,6 +95,10 @@ function UserCard({ cardUser, partner }) {
             src={cardUser.imageUrl || "letter"}
             className={classes.avatar}
             variant="rounded"
+            component={Link}
+            aria-label="chat"
+            to={path}
+            role="link"
           />
           <div className={classes.details}>
             <div className={classes.items}>
@@ -160,14 +166,14 @@ function UserCard({ cardUser, partner }) {
         onClose={handleClose}
         message={error ? error : "Partner added!"}
         action={
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
         }
       />
     </Card>

@@ -1,10 +1,15 @@
 import { Button } from "@material-ui/core";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser } from "../../store/usersSlice";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../config";
 import Loading from "../Loading";
+import Cropper from "react-easy-crop";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+
 
 const useStyles = makeStyles({
   root: {
@@ -20,6 +25,7 @@ const useStyles = makeStyles({
     height: 200,
     border: "2px solid gray",
     marginBottom: ".2rem",
+    position: "relative",
   },
   img: {
     width: "100%",
@@ -48,6 +54,23 @@ function ImageUploader({ imageUrl, userId }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedPixels, setCroppedPixels] = useState(null);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastMsg, setToastMsg] = useState('')
+  
+  const handleToastClose = () => {
+    setToastOpen(false);
+  };
+  const handleToastOpen = (msg) => {
+    setToastOpen(true);
+    setToastMsg(msg)
+  };
+
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedPixels(croppedAreaPixels);
+  }, []);
 
   async function handleFileSelect() {
     if (fileSelect) {
@@ -58,7 +81,6 @@ function ImageUploader({ imageUrl, userId }) {
   function handleChange(e) {
     let selected = e.target.files[0];
     let preview = URL.createObjectURL(selected);
-    console.log("prev", preview);
     setImage(preview);
     setFile(selected);
   }
@@ -66,6 +88,8 @@ function ImageUploader({ imageUrl, userId }) {
   // Upload file to Cloudinary
   function handleUpload() {
     setLoading(true);
+    const transformation = `${croppedPixels.x},${croppedPixels.y},${croppedPixels.width},${croppedPixels.height}`;
+
     const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
     const xhr = new XMLHttpRequest();
     const fd = new FormData();
@@ -81,11 +105,20 @@ function ImageUploader({ imageUrl, userId }) {
         setFile(null);
         dispatch(updateCurrentUser({ imageUrl: url, id: userId }));
         setLoading(false);
+        handleToastOpen("Image updated!");
+      }
+      if (xhr.readyState === 4 && xhr.status !== 200) {
+        // File failed to upload
+        setLoading(false);
+        setFile(null);
+        setImage(currentImage);
+        handleToastOpen("Image upload failed. Try again later")
       }
     };
 
-    fd.append("upload_preset", UPLOAD_PRESET);
     fd.append("file", file);
+    fd.append("custom_coordinates", transformation);
+    fd.append("upload_preset", UPLOAD_PRESET);
     xhr.send(fd);
   }
 
@@ -97,7 +130,19 @@ function ImageUploader({ imageUrl, userId }) {
     <div className={classes.root}>
       <div className={classes.imgContainer}>
         {loading && <Loading />}
-        <img src={image} alt="avatar" className={classes.img} />
+        {file ? (
+          <Cropper
+            image={image}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        ) : (
+          <img src={image} alt="avatar" className={classes.img} />
+        )}
       </div>
 
       <form className={classes.form}>
@@ -142,6 +187,26 @@ function ImageUploader({ imageUrl, userId }) {
           onChange={handleChange}
         />
       </form>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={toastOpen}
+        autoHideDuration={5000}
+        onClose={handleToastClose}
+        message={toastMsg}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleToastClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+      />
     </div>
   );
 }

@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   link: {
-    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    fontSize: "1rem",
   },
   title: {
     flexGrow: 1,
@@ -217,7 +218,12 @@ function NavWrapper({ window, children }) {
                   >
                     Log In
                   </Link>
-                  <Link component={RouterLink} to="/signup" color="inherit">
+                  <Link
+                    component={RouterLink}
+                    to="/signup"
+                    color="inherit"
+                    className={classes.link}
+                  >
                     Sign Up
                   </Link>
                 </>

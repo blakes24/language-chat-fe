@@ -11,15 +11,18 @@ exports[`matches snapshot 1`] = `
       <div
         class="makeStyles-top-14"
       >
-        <div
+        <a
+          aria-label="chat"
           class="MuiAvatar-root MuiAvatar-rounded makeStyles-avatar-13"
+          href="/chats/1-1"
+          role="link"
         >
           <img
             alt="Brady"
             class="MuiAvatar-img"
             src="https://cdn.fakercloud.com/avatars/happypeter1983_128.jpg"
           />
-        </div>
+        </a>
         <div
           class="makeStyles-details-16"
         >

@@ -10,12 +10,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-end",
   },
   body: {
-    fontSize: 14,
+    fontSize: "1rem",
     padding: "3px",
   },
   avatar: {
-    width: "25px",
-    height: "25px",
+    width: "30px",
+    height: "30px",
     marginRight: ".5rem",
     backgroundColor: theme.palette.primary.main,
   },
