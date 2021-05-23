@@ -115,6 +115,7 @@ function AuthForm({
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
+          FormHelperTextProps={{ error: true }}
           helperText={
             formik.errors.email && formik.touched.email && formik.errors.email
           }
@@ -132,6 +133,7 @@ function AuthForm({
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
+          FormHelperTextProps={{ error: true }}
           helperText={
             formik.errors.password &&
             formik.touched.password &&

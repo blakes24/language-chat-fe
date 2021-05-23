@@ -47,7 +47,7 @@ function Login() {
     try {
       let res = await ChatApi.getToken({
         provider: "facebook",
-        token: user._token.idToken,
+        token: user._token.accessToken,
       });
       dispatch(setToken(res));
       setLocalStorage("token", res);

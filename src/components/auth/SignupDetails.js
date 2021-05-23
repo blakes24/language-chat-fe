@@ -113,6 +113,7 @@ function SignupDetails({
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.name}
+          FormHelperTextProps={{ error: true }}
           helperText={
             formik.errors.name && formik.touched.name && formik.errors.name
           }
@@ -130,6 +131,7 @@ function SignupDetails({
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.bio}
+          FormHelperTextProps={{ error: true }}
           helperText={
             formik.errors.bio && formik.touched.bio && formik.errors.bio
           }
