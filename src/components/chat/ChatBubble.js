@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ChatBubble({ user, msg, type }) {
+function ChatBubble({ user, msg }) {
   const classes = useStyles();
 
   return (
