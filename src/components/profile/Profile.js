@@ -106,7 +106,7 @@ function Profile() {
     dispatch(deleteUser(user.id));
     if (loading === "idle" && !error) {
       setLocalStorage("token", "");
-      history.push("/");
+      history.push("/")
     } else {
       setToastOpen(true);
       setDeleteOpen(false);
@@ -115,174 +115,173 @@ function Profile() {
 
   return (
     <Container className={classes.root}>
-      <Typography align="center" variant="h3" component="h1" color="secondary">
-        {user.name}{" "}
-        <FormControlLabel
-          control={
-            <Switch
-              checked={user.active}
-              onChange={handleChange}
-              name="active"
-              color="primary"
-            />
-          }
-          label={user.active ? "active" : "away"}
-          className={classes.switch}
-        />
-      </Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={12} sm={6} className={classes.item1}>
-          <div>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              color="secondary"
-            >
-              User Details{" "}
-              <IconButton
-                aria-label="edit user details"
-                color="secondary"
-                onClick={handleUserOpen}
-              >
-                <EditIcon />
-              </IconButton>
-            </Typography>
-            <Typography paragraph gutterBottom>
-              <b>Name: </b>
-              {user.name}
-            </Typography>
-            <Typography paragraph gutterBottom>
-              <b>Email: </b>
-              {user.email}
-            </Typography>
-            <Typography paragraph gutterBottom>
-              <b>About: </b>
-              {user.bio}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              color="secondary"
-              className={classes.root}
-            >
-              Languages{" "}
-            </Typography>
-            <Typography>
-              <b>Native Language: </b>
-              {user.speaks[0].language}
-              <IconButton
-                aria-label="edit native language"
-                color="secondary"
-                onClick={handleSpeaksOpen}
-              >
-                <EditIcon />
-              </IconButton>
-            </Typography>
-            <Typography gutterBottom>
-              <b>Learning: </b>
-              {user.learning[0].language}
-              <IconButton
-                aria-label="edit learning language"
-                color="secondary"
-                onClick={handleLearningOpen}
-              >
-                <EditIcon />
-              </IconButton>
-            </Typography>
-            <div>
-              Level
-              <LinearProgress
-                variant="determinate"
-                value={(user.learning[0].level / 4) * 100}
-                className={classes.level}
-              />
-            </div>
-            <Button
-              color="primary"
-              onClick={() => setDeleteOpen(true)}
-              variant="contained"
-              className={classes.btn}
-            >
-              Delete Account
-            </Button>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={6} className={classes.item2}>
-          <div>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              color="secondary"
-            >
-              Profile Picture
-            </Typography>
-            <ImageUploader imageUrl={user.imageUrl} userId={user.id} />
-          </div>
-        </Grid>
-      </Grid>
-      <EditUserModal open={userOpen} handleClose={handleUserClose} />
-      <EditLangModal
-        open={langOpen}
-        type={langType}
-        handleClose={handleLangClose}
-      />
-      <Dialog
-        open={deleteOpen}
-        onClose={() => setDeleteOpen(false)}
-        aria-labelledby="delete-alert"
-      >
-        <DialogContent>
-          <DialogContentText id="delete-alert" color="secondary">
-            Are you sure you want to delete your account?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setDeleteOpen(false)}
-            variant="contained"
-            color="secondary"
-            id="cancel"
-          >
-            Cancel
-          </Button>
-          <Button
-       
-                id="delete"
-  
-                     onClick={deleteAccount}
-     
+      {user &&
+        (<>
+          <Typography align="center" variant="h3" component="h1" color="secondary">
+            {user.name}{" "}
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={user.active}
+                  onChange={handleChange}
+                  name="active"
                   color="primary"
-        
-               variant="contained"
-          
+                />
+              }
+              label={user.active ? "active" : "away"}
+              className={classes.switch}
+            />
+          </Typography>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={6} className={classes.item1}>
+              <div>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  color="secondary"
+                >
+                  User Details{" "}
+                  <IconButton
+                    aria-label="edit user details"
+                    color="secondary"
+                    onClick={handleUserOpen}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Typography>
+                <Typography paragraph gutterBottom>
+                  <b>Name: </b>
+                  {user.name}
+                </Typography>
+                <Typography paragraph gutterBottom>
+                  <b>Email: </b>
+                  {user.email}
+                </Typography>
+                <Typography paragraph gutterBottom>
+                  <b>About: </b>
+                  {user.bio}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  color="secondary"
+                  className={classes.root}
+                >
+                  Languages{" "}
+                </Typography>
+                <Typography>
+                  <b>Native Language: </b>
+                  {user.speaks[0].language}
+                  <IconButton
+                    aria-label="edit native language"
+                    color="secondary"
+                    onClick={handleSpeaksOpen}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Typography>
+                <Typography gutterBottom>
+                  <b>Learning: </b>
+                  {user.learning[0].language}
+                  <IconButton
+                    aria-label="edit learning language"
+                    color="secondary"
+                    onClick={handleLearningOpen}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Typography>
+                <div>
+                  Level
+                  <LinearProgress
+                    variant="determinate"
+                    value={(user.learning[0].level / 4) * 100}
+                    className={classes.level}
+                  />
+                </div>
+                <Button
+                  color="primary"
+                  onClick={() => setDeleteOpen(true)}
+                  variant="contained"
+                  className={classes.btn}
+                >
+                  Delete Account
+                </Button>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.item2}>
+              <div>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  color="secondary"
+                >
+                  Profile Picture
+                </Typography>
+                <ImageUploader imageUrl={user.imageUrl} userId={user.id} />
+              </div>
+            </Grid>
+          </Grid>
+          <EditUserModal open={userOpen} handleClose={handleUserClose} />
+          <EditLangModal
+            open={langOpen}
+            type={langType}
+            handleClose={handleLangClose}
+          />
+          <Dialog
+            open={deleteOpen}
+            onClose={() => setDeleteOpen(false)}
+            aria-labelledby="delete-alert"
           >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={toastOpen}
-        autoHideDuration={5000}
-        onClose={() => setToastOpen(false)}
-        message={error}
-        action={
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={() => setToastOpen(false)}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        }
-      />
+            <DialogContent>
+              <DialogContentText id="delete-alert" color="secondary">
+                Are you sure you want to delete your account?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setDeleteOpen(false)}
+                variant="contained"
+                color="secondary"
+                id="cancel"
+              >
+                Cancel
+              </Button>
+              <Button
+                id="delete"
+                onClick={deleteAccount}
+                color="primary"
+                variant="contained"
+              >
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            open={toastOpen}
+            autoHideDuration={5000}
+            onClose={() => setToastOpen(false)}
+            message={error ? error : "Account"}
+            action={
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={() => setToastOpen(false)}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            }
+          />
+        </>
+        )}
     </Container>
   );
 }

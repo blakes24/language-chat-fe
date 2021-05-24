@@ -1,10 +1,13 @@
 import axios from "axios";
 import { BASE_URL } from "../config";
+import { getFromLocalStorage } from "./localStorage";
 
 /** API Class: methods used to connect to the API. */
 
+let token = getFromLocalStorage("token", "");
+
 class ChatApi {
-  static token;
+  static token = token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);

@@ -14,7 +14,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import PeopleIcon from "@material-ui/icons/People";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -88,6 +92,7 @@ function NavWrapper({ window, children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const user = useSelector((state) => state.users.current);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   let match = useRouteMatch("/chats");
 
@@ -95,6 +100,7 @@ function NavWrapper({ window, children }) {
     setMobileOpen(false);
     setLocalStorage("token", "");
     dispatch(setToken(""));
+    history.push("/");
   }
 
   const handleDrawerToggle = () => {

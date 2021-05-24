@@ -99,7 +99,9 @@ function Chats() {
             {currentRoom ? currentRoom.partner.name : "Chat"}
           </Typography>{" "}
           <Divider />
-          {error && Array.isArray(error) && error.map((err) => <p>{err}</p>)}
+          {error &&
+            Array.isArray(error) &&
+            error.map((err, idx) => <p key={idx}>{err}</p>)}
           {currentRoom && <ChatRoom />}
         </Container>
       </div>

@@ -140,7 +140,10 @@ describe("Edit Profile", () => {
 
     cy.get("button[aria-label='edit user details']").click();
     cy.get("#form-dialog-title").should("contain", "Edit Profile");
-    cy.get("#bio").type("stuff about me").should("contain", "stuff about me");
+    cy.get("#bio")
+      .clear()
+      .type("stuff about me")
+      .should("contain", "stuff about me");
     cy.contains("Save Changes").click();
 
     cy.get("body").should("contain", "stuff about me");
@@ -170,5 +173,66 @@ describe("Edit Profile", () => {
     cy.get("li").contains("Russian").click();
     cy.contains("Save Changes").click();
     cy.get("body").should("contain", "Native Language: Russian");
+  });
+});
+
+describe("Partners", () => {
+  beforeEach(() => {
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
+  });
+
+  it("lets a user add and view partners", () => {
+    cy.get("button[aria-label='add partner']").first().click();
+    cy.get("[role='alert']").should("be.visible");
+
+    cy.contains("Partners").click();
+    cy.get("h1").should("contain", "Partners");
+    cy.get("body").should("not.contain", "No partners yet");
+  });
+});
+
+describe("Chats", () => {
+  beforeEach(() => {
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
+  });
+
+  it("lets a user select a chat partner and send message", () => {
+    cy.get("[aria-label='chat']").first().click();
+    cy.url().should("include", "/chats");
+
+    cy.get("[aria-label='send']").should("be.disabled");
+    cy.get("#message").type("hola").should("have.value", "hola");
+
+    cy.get("[aria-label='send']").should("not.be.disabled");
+  });
+});
+
+describe("Redirects", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
+
+  it("redirects from protected routes if not logged in", () => {
+    cy.visit("/profile");
+    cy.url().should("not.include", "/profile");
+    cy.get("body").should("contain", "Practice with native speakers");
+
+    cy.visit("/chats");
+    cy.url().should("not.include", "/chats");
+    cy.get("body").should("contain", "Practice with native speakers");
+
+    cy.visit("/partners");
+    cy.url().should("not.include", "/partners");
+    cy.get("body").should("contain", "Practice with native speakers");
+  });
+
+  it("displays 404 page", () => {
+    cy.visit("/not-a-page");
+    cy.contains("Go Home").click();
+
+    cy.url().should("not.include", "/not-a-page");
+    cy.get("body").should("contain", "Practice with native speakers");
   });
 });
