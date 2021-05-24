@@ -3,28 +3,28 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-22 MuiContainer-maxWidthLg"
+    class="MuiContainer-root makeStyles-root-23 MuiContainer-maxWidthLg"
   >
     <h1
       class="MuiTypography-root MuiTypography-h3 MuiTypography-colorSecondary MuiTypography-alignCenter"
     >
       Test 
       <label
-        class="MuiFormControlLabel-root makeStyles-switch-26"
+        class="MuiFormControlLabel-root makeStyles-switch-27"
       >
         <span
           class="MuiSwitch-root"
         >
           <span
             aria-disabled="false"
-            class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-27 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked-28 Mui-checked"
+            class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-29 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked-30 Mui-checked"
           >
             <span
               class="MuiIconButton-label"
             >
               <input
                 checked=""
-                class="PrivateSwitchBase-input-30 MuiSwitch-input"
+                class="PrivateSwitchBase-input-32 MuiSwitch-input"
                 name="active"
                 type="checkbox"
                 value=""
@@ -52,7 +52,7 @@ exports[`matches snapshot 1`] = `
       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
     >
       <div
-        class="MuiGrid-root makeStyles-item1-23 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        class="MuiGrid-root makeStyles-item1-24 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
       >
         <div>
           <h2
@@ -109,7 +109,7 @@ exports[`matches snapshot 1`] = `
             stuff about mae
           </p>
           <h2
-            class="MuiTypography-root makeStyles-root-22 MuiTypography-h5 MuiTypography-colorSecondary MuiTypography-gutterBottom"
+            class="MuiTypography-root makeStyles-root-23 MuiTypography-h5 MuiTypography-colorSecondary MuiTypography-gutterBottom"
           >
             Languages 
           </h2>
@@ -121,7 +121,7 @@ exports[`matches snapshot 1`] = `
             </b>
             Italian
             <button
-              aria-label="edit languages"
+              aria-label="edit native language"
               class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSecondary"
               tabindex="0"
               type="button"
@@ -153,7 +153,7 @@ exports[`matches snapshot 1`] = `
             </b>
             Korean
             <button
-              aria-label="edit languages"
+              aria-label="edit learning language"
               class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSecondary"
               tabindex="0"
               type="button"
@@ -183,7 +183,7 @@ exports[`matches snapshot 1`] = `
               aria-valuemax="100"
               aria-valuemin="0"
               aria-valuenow="50"
-              class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-25 MuiLinearProgress-determinate"
+              class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-26 MuiLinearProgress-determinate"
               role="progressbar"
             >
               <div
@@ -192,10 +192,24 @@ exports[`matches snapshot 1`] = `
               />
             </div>
           </div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btn-28 MuiButton-containedPrimary"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Delete Account
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
         </div>
       </div>
       <div
-        class="MuiGrid-root makeStyles-item2-24 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        class="MuiGrid-root makeStyles-item2-25 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
       >
         <div>
           <h2
@@ -204,19 +218,19 @@ exports[`matches snapshot 1`] = `
             Profile Picture
           </h2>
           <div
-            class="makeStyles-root-31"
+            class="makeStyles-root-33"
           >
             <div
-              class="makeStyles-imgContainer-33"
+              class="makeStyles-imgContainer-35"
             >
               <img
                 alt="avatar"
-                class="makeStyles-img-34"
+                class="makeStyles-img-36"
                 src="https://cdn.fakercloud.com/avatars/happypeter1983_128.jpg"
               />
             </div>
             <form
-              class="makeStyles-form-32"
+              class="makeStyles-form-34"
             >
               <button
                 class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-fullWidth"

@@ -8,7 +8,6 @@ class ChatApi {
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
-
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${ChatApi.token}` };
     const params = method === "get" ? data : {};
@@ -117,6 +116,13 @@ class ChatApi {
 
   static async addPartner(userId, data) {
     let res = await this.request(`users/${userId}/partners`, data, "post");
+    return res;
+  }
+
+  /** Deletes a user */
+
+  static async deleteUser(userId, data) {
+    let res = await this.request(`users/${userId}`, data, "delete");
     return res;
   }
 }

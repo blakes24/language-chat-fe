@@ -3,6 +3,7 @@ describe("Log in", () => {
     cy.visit("/");
   });
   it("lets a user log in and out", () => {
+    cy.intercept("POST", "/auth/token").as("login");
     cy.contains("Log In").click();
 
     // Should be on a new URL which includes '/login'
@@ -15,9 +16,12 @@ describe("Log in", () => {
     cy.get("#password").type("nico1pw{enter}");
 
     cy.get(".MuiCircularProgress-svg").should("be.visible");
+    // wait for login response
+    cy.wait("@login");
 
-    cy.location("pathname", { timeout: 10000 }).should("not.include", "/login");
     cy.get("h1").should("contain", "Find a partner");
+
+    cy.saveLocalStorageCache();
 
     cy.contains("Log Out").click();
     cy.get(".MuiToolbar-root").should("contain", "Log In");
@@ -38,9 +42,8 @@ describe("Log in", () => {
 
 describe("Home page", () => {
   beforeEach(() => {
-    cy.visit("/login");
-    cy.get("#email").type("nico1@mail.com");
-    cy.get("#password").type("nico1pw{enter}");
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
   });
 
   it("navigation works", () => {
@@ -74,5 +77,98 @@ describe("Home page", () => {
     cy.get(".MuiSelect-root").click();
     cy.get("li").contains("Hindi").click();
     cy.get(".MuiCardContent-root").should("contain", "Hindi");
+  });
+});
+
+describe("Sign up", () => {
+  it("lets a user sign up and delete account", () => {
+    cy.visit("/");
+    cy.contains("Sign Up").click();
+
+    cy.url().should("include", "/signup");
+
+    cy.get("#email")
+      .type("tester@mail.com")
+      .should("have.value", "tester@mail.com");
+    cy.get("#password").type("testpw{enter}");
+
+    cy.get("#name").type("test").should("have.value", "test");
+    cy.get("#bio").type("stuff").should("have.value", "stuff");
+    cy.get("#mui-component-select-speaksLang").click();
+    cy.contains("English").click();
+    cy.get("#mui-component-select-learnsLang").click();
+    cy.contains("French").click();
+    cy.get("#mui-component-select-learnsLevel").click();
+    cy.contains("Beginner").click();
+    cy.contains("Create Account").click();
+
+    cy.location("pathname", { timeout: 10000 }).should(
+      "not.include",
+      "/signup"
+    );
+    cy.contains("Profile").click();
+    cy.get("h1").should("contain", "test");
+    cy.contains("Delete Account").click();
+    cy.get("#delete").click();
+
+    cy.location("pathname", { timeout: 10000 }).should(
+      "not.include",
+      "/profile"
+    );
+    cy.get("body").should("contain", "Practice with native speakers");
+  });
+
+  it("displays error for missing credentials", () => {
+    cy.visit("/signup");
+    // enter password but no email
+    cy.get("#password").type("password{enter}");
+    cy.get("#email-helper-text").should("contain", "Required");
+  });
+});
+
+describe("Edit Profile", () => {
+  beforeEach(() => {
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
+  });
+
+  it("lets a user edit profile", () => {
+    cy.contains("Profile").click();
+
+    cy.get("h1").should("contain", "Nico");
+    cy.get("body").should("contain", "User Details");
+
+    cy.get("button[aria-label='edit user details']").click();
+    cy.get("#form-dialog-title").should("contain", "Edit Profile");
+    cy.get("#bio").type("stuff about me").should("contain", "stuff about me");
+    cy.contains("Save Changes").click();
+
+    cy.get("body").should("contain", "stuff about me");
+  });
+
+  it("lets a user toggle active status", () => {
+    cy.contains("Profile").click();
+
+    cy.get("body").should("contain", "active");
+    cy.get(".MuiSwitch-input").click();
+    cy.get("body").should("contain", "away");
+    cy.get(".MuiSwitch-input").click();
+    cy.get("body").should("contain", "active");
+  });
+
+  it("lets a user edit languages", () => {
+    cy.contains("Profile").click();
+
+    cy.get("[aria-label='edit native language']").click();
+    cy.get("#mui-component-select-speaks").click();
+    cy.get("li").contains("Korean").click();
+    cy.contains("Save Changes").click();
+    cy.get("body").should("contain", "Native Language: Korean");
+
+    cy.get("[aria-label='edit native language']").click();
+    cy.get("#mui-component-select-speaks").click();
+    cy.get("li").contains("Russian").click();
+    cy.contains("Save Changes").click();
+    cy.get("body").should("contain", "Native Language: Russian");
   });
 });

@@ -6,15 +6,24 @@ import {
   makeStyles,
   LinearProgress,
   IconButton,
+  Button,
+  DialogActions,
+  DialogContentText,
 } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentUser } from "../../store/usersSlice";
+import { updateCurrentUser, deleteUser } from "../../store/usersSlice";
+import { setLocalStorage } from "../../helpers/localStorage";
 import EditUserModal from "./EditUserModal";
 import EditLangModal from "./EditLangModal";
+import { useHistory } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,15 +63,23 @@ const useStyles = makeStyles((theme) => ({
   switch: {
     marginLeft: ".5rem",
   },
+  btn: {
+    marginTop: "2rem",
+  },
 }));
 
 function Profile() {
   const user = useSelector((state) => state.users.current);
+  const loading = useSelector((state) => state.users.loading);
+  const error = useSelector((state) => state.users.error);
   const classes = useStyles();
   const [langOpen, setLangOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
   const [langType, setLangType] = useState("speaks");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSpeaksOpen = () => {
     setLangType("speaks");
@@ -83,6 +100,17 @@ function Profile() {
   };
   const handleChange = () => {
     dispatch(updateCurrentUser({ active: !user.active, id: user.id }));
+  };
+
+  const deleteAccount = () => {
+    dispatch(deleteUser(user.id));
+    if (loading === "idle" && !error) {
+      setLocalStorage("token", "");
+      history.push("/");
+    } else {
+      setToastOpen(true);
+      setDeleteOpen(false);
+    }
   };
 
   return (
@@ -145,7 +173,7 @@ function Profile() {
               <b>Native Language: </b>
               {user.speaks[0].language}
               <IconButton
-                aria-label="edit languages"
+                aria-label="edit native language"
                 color="secondary"
                 onClick={handleSpeaksOpen}
               >
@@ -156,7 +184,7 @@ function Profile() {
               <b>Learning: </b>
               {user.learning[0].language}
               <IconButton
-                aria-label="edit languages"
+                aria-label="edit learning language"
                 color="secondary"
                 onClick={handleLearningOpen}
               >
@@ -171,6 +199,14 @@ function Profile() {
                 className={classes.level}
               />
             </div>
+            <Button
+              color="primary"
+              onClick={() => setDeleteOpen(true)}
+              variant="contained"
+              className={classes.btn}
+            >
+              Delete Account
+            </Button>
           </div>
         </Grid>
         <Grid item xs={12} sm={6} className={classes.item2}>
@@ -192,6 +228,60 @@ function Profile() {
         open={langOpen}
         type={langType}
         handleClose={handleLangClose}
+      />
+      <Dialog
+        open={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        aria-labelledby="delete-alert"
+      >
+        <DialogContent>
+          <DialogContentText id="delete-alert" color="secondary">
+            Are you sure you want to delete your account?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setDeleteOpen(false)}
+            variant="contained"
+            color="secondary"
+            id="cancel"
+          >
+            Cancel
+          </Button>
+          <Button
+       
+                id="delete"
+  
+                     onClick={deleteAccount}
+     
+                  color="primary"
+        
+               variant="contained"
+          
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={toastOpen}
+        autoHideDuration={5000}
+        onClose={() => setToastOpen(false)}
+        message={error}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={() => setToastOpen(false)}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
       />
     </Container>
   );
