@@ -44,6 +44,7 @@ exports[`matches snapshot 1`] = `
         </div>
       </div>
       <button
+        aria-label="send"
         class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-15 Mui-disabled Mui-disabled"
         disabled=""
         tabindex="-1"

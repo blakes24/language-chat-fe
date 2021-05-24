@@ -149,6 +149,7 @@ function ChatRoom() {
           type="submit"
           className={classes.btn}
           disabled={!message.trim()}
+          aria-label="send"
         >
           <SendIcon />
         </IconButton>

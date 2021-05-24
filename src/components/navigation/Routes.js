@@ -12,6 +12,7 @@ import jwtDecode from "jwt-decode";
 import NavWrapper from "../navigation/NavWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentUser, clearUser } from "../../store/usersSlice";
+import NotFound from "../NotFound";
 
 function Routes() {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function Routes() {
           <Login />
         </Route>
         <Route>
-          <p>Page not found.</p>
+          <NotFound />
         </Route>
       </Switch>
     </NavWrapper>

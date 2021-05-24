@@ -33,7 +33,7 @@ function Partners() {
   const loading = useSelector((state) => state.partners.loading);
   const error = useSelector((state) => state.partners.error);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     function getPartners() {
       try {
