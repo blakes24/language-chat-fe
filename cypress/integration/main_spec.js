@@ -1,5 +1,6 @@
 describe("Log in", () => {
   beforeEach(() => {
+    cy.clearLocalStorage();
     cy.visit("/");
   });
   it("lets a user log in and out", () => {
@@ -40,47 +41,10 @@ describe("Log in", () => {
   });
 });
 
-describe("Home page", () => {
-  beforeEach(() => {
-    cy.restoreLocalStorageCache();
-    cy.visit("/");
-  });
-
-  it("navigation works", () => {
-    cy.get("h1").should("contain", "Find a partner and start chatting!");
-
-    cy.contains("Profile").click();
-    cy.url().should("include", "/profile");
-
-    cy.contains("Partners").click();
-    cy.url().should("include", "/partners");
-
-    cy.contains("Chats").click();
-    cy.url().should("include", "/chats");
-
-    cy.contains("Home").click();
-    cy.get("h1").should("contain", "Find a partner and start chatting!");
-
-    cy.get(".MuiAvatar-root").first().click();
-    cy.url().should("include", "/chats");
-
-    cy.contains("Log Out").click();
-    cy.url().should("not.include", "/chats");
-    cy.contains("Sign Up");
-  });
-
-  it("filters users by language", () => {
-    cy.get(".MuiSelect-root").click();
-    cy.get("li").contains("Italian").click();
-    cy.get(".MuiCardContent-root").should("contain", "Italian");
-
-    cy.get(".MuiSelect-root").click();
-    cy.get("li").contains("Hindi").click();
-    cy.get(".MuiCardContent-root").should("contain", "Hindi");
-  });
-});
-
 describe("Sign up", () => {
+  beforeEach(() => {
+    cy.clearLocalStorage();
+  });
   it("lets a user sign up and delete account", () => {
     cy.visit("/");
     cy.contains("Sign Up").click();
@@ -126,6 +90,76 @@ describe("Sign up", () => {
   });
 });
 
+describe("Redirects", () => {
+  beforeEach(() => {
+    cy.clearLocalStorage();
+    cy.visit("/");
+  });
+
+  it("redirects from protected routes if not logged in", () => {
+    cy.visit("/profile");
+    cy.url().should("not.include", "/profile");
+    cy.get("body").should("contain", "Practice with native speakers");
+
+    cy.visit("/chats");
+    cy.url().should("not.include", "/chats");
+    cy.get("body").should("contain", "Practice with native speakers");
+
+    cy.visit("/partners");
+    cy.url().should("not.include", "/partners");
+    cy.get("body").should("contain", "Practice with native speakers");
+  });
+
+  it("displays 404 page", () => {
+    cy.visit("/not-a-page");
+    cy.contains("Go Home").click();
+
+    cy.url().should("not.include", "/not-a-page");
+    cy.get("body").should("contain", "Practice with native speakers");
+  });
+});
+
+describe("Home page", () => {
+  beforeEach(() => {
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
+  });
+
+  it("navigation works", () => {
+    cy.get("h1").should("contain", "Find a partner and start chatting!");
+
+    cy.contains("Profile").click();
+    cy.url().should("include", "/profile");
+
+    cy.contains("Partners").click();
+    cy.url().should("include", "/partners");
+
+    cy.contains("Chats").click();
+    cy.url().should("include", "/chats");
+
+    cy.contains("Home").click();
+    cy.get("h1").should("contain", "Find a partner and start chatting!");
+
+    cy.get(".MuiAvatar-root").first().click();
+    cy.url().should("include", "/chats");
+
+    cy.contains("Log Out").click();
+    cy.url().should("not.include", "/chats");
+    cy.contains("Sign Up");
+  });
+
+  it("filters users by language", () => {
+    cy.get(".MuiSelect-root").click();
+    cy.get("li").contains("Italian").click();
+    cy.get(".MuiCardContent-root").should("contain", "Italian");
+
+    cy.get(".MuiSelect-root").click();
+    cy.get("li").contains("Hindi").click();
+    cy.get(".MuiCardContent-root").should("contain", "Hindi");
+  });
+});
+
+
 describe("Edit Profile", () => {
   beforeEach(() => {
     cy.restoreLocalStorageCache();
@@ -151,7 +185,7 @@ describe("Edit Profile", () => {
 
   it("lets a user toggle active status", () => {
     cy.contains("Profile").click();
-
+    
     cy.get("body").should("contain", "active");
     cy.get(".MuiSwitch-input").click();
     cy.get("body").should("contain", "away");
@@ -206,33 +240,5 @@ describe("Chats", () => {
     cy.get("#message").type("hola").should("have.value", "hola");
 
     cy.get("[aria-label='send']").should("not.be.disabled");
-  });
-});
-
-describe("Redirects", () => {
-  beforeEach(() => {
-    cy.visit("/");
-  });
-
-  it("redirects from protected routes if not logged in", () => {
-    cy.visit("/profile");
-    cy.url().should("not.include", "/profile");
-    cy.get("body").should("contain", "Practice with native speakers");
-
-    cy.visit("/chats");
-    cy.url().should("not.include", "/chats");
-    cy.get("body").should("contain", "Practice with native speakers");
-
-    cy.visit("/partners");
-    cy.url().should("not.include", "/partners");
-    cy.get("body").should("contain", "Practice with native speakers");
-  });
-
-  it("displays 404 page", () => {
-    cy.visit("/not-a-page");
-    cy.contains("Go Home").click();
-
-    cy.url().should("not.include", "/not-a-page");
-    cy.get("body").should("contain", "Practice with native speakers");
   });
 });

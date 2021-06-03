@@ -11,7 +11,8 @@ import ChatApi from "../../helpers/api";
 import jwtDecode from "jwt-decode";
 import NavWrapper from "../navigation/NavWrapper";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCurrentUser, clearUser } from "../../store/usersSlice";
+import { fetchCurrentUser } from "../../store/usersSlice";
+import { logoutUser } from "../../store/root";
 import NotFound from "../NotFound";
 
 function Routes() {
@@ -23,7 +24,7 @@ function Routes() {
   useEffect(() => {
     async function getUser() {
       if (!token) {
-        dispatch(clearUser());
+        dispatch(logoutUser());
       } else {
         try {
           ChatApi.token = token;
