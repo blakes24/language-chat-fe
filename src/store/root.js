@@ -1,4 +1,8 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  getDefaultMiddleware,
+  createAction,
+} from "@reduxjs/toolkit";
 import usersReducer from "./usersSlice";
 import roomReducer from "./roomSlice";
 import messageReducer from "./messageSlice";
@@ -22,12 +26,22 @@ const reducers = combineReducers({
   partners: partnerReducer,
 });
 
+export const logoutUser = createAction("LOGOUT_USER");
+
+const rootReducer = (state, action) => {
+  if (action.type === "LOGOUT_USER") {
+    return reducers(undefined, action);
+  }
+  return reducers(state, action);
+};
+
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["users"],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,

@@ -84,9 +84,6 @@ export const usersSlice = createSlice({
     error: null,
   },
   reducers: {
-    clearUser: (state, action) => {
-      state.current = null;
-    },
     setToken: (state, action) => {
       state.token = action.payload;
     },
@@ -205,6 +202,6 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { clearUser, setToken } = usersSlice.actions;
+export const { setToken } = usersSlice.actions;
 
 export default usersSlice.reducer;

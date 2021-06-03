@@ -28,8 +28,8 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../store/usersSlice";
 import { setLocalStorage } from "../../helpers/localStorage";
+import { logoutUser } from "../../store/root";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,7 +99,7 @@ function NavWrapper({ window, children }) {
   function logout() {
     setMobileOpen(false);
     setLocalStorage("token", "");
-    dispatch(setToken(""));
+    dispatch(logoutUser());
     history.push("/");
   }
 
