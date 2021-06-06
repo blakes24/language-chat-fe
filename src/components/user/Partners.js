@@ -57,7 +57,12 @@ function Partners() {
       </Typography>
 
       {!partners.length && loading === "pending" && <Loading solid />}
-      {error && error.map((err) => <p className={classes.err}>{err}</p>)}
+      {error &&
+        (Array.isArray(error) ? (
+          error.map((err) => <p className={classes.err}>{err}</p>)
+        ) : (
+          <p className={classes.err}>{error.message}</p>
+        ))}
       {partners.length > 0 ? (
         <UserList users={partners} partner={true} />
       ) : (

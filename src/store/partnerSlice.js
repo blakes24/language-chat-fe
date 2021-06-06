@@ -13,6 +13,18 @@ export const fetchPartners = createAsyncThunk(
   }
 );
 
+export const deletePartner = createAsyncThunk(
+  "partners/deletePartner",
+  async (data, { rejectWithValue }) => {
+    try {
+      await ChatApi.deletePartner(data);
+      return data.partnerId;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 export const partnerSlice = createSlice({
   name: "partners",
   initialState: { items: [], loading: "idle", error: null },
@@ -31,6 +43,24 @@ export const partnerSlice = createSlice({
       }
     },
     [fetchPartners.rejected]: (state, action) => {
+      if (state.loading === "pending") {
+        state.loading = "idle";
+        state.error = action.payload;
+      }
+    },
+    [deletePartner.pending]: (state, action) => {
+      if (state.loading === "idle") {
+        state.error = null;
+        state.loading = "pending";
+      }
+    },
+    [deletePartner.fulfilled]: (state, action) => {
+      if (state.loading === "pending") {
+        state.loading = "idle";
+        state.items = state.items.filter((item) => item.id !== action.payload);
+      }
+    },
+    [deletePartner.rejected]: (state, action) => {
       if (state.loading === "pending") {
         state.loading = "idle";
         state.error = action.payload;

@@ -3,20 +3,20 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-12 MuiContainer-maxWidthLg"
+    class="MuiContainer-root makeStyles-root-13 MuiContainer-maxWidthLg"
   >
     <div
-      class="MuiPaper-root MuiCard-root makeStyles-root-13 MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiPaper-root MuiCard-root makeStyles-root-14 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <div
         class="MuiCardContent-root"
       >
         <div
-          class="makeStyles-top-16"
+          class="makeStyles-top-17"
         >
           <a
             aria-label="chat"
-            class="MuiAvatar-root MuiAvatar-rounded makeStyles-avatar-15"
+            class="MuiAvatar-root MuiAvatar-rounded makeStyles-avatar-16"
             href="/chats/1-1"
             role="link"
           >
@@ -27,10 +27,10 @@ exports[`matches snapshot 1`] = `
             />
           </a>
           <div
-            class="makeStyles-details-18"
+            class="makeStyles-details-19"
           >
             <div
-              class="makeStyles-items-17"
+              class="makeStyles-items-18"
             >
               <h2
                 class="MuiTypography-root MuiTypography-h6"
@@ -40,8 +40,9 @@ exports[`matches snapshot 1`] = `
               <div>
                 <button
                   aria-label="add partner"
-                  class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-22 MuiIconButton-colorSecondary"
+                  class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-23 MuiIconButton-colorSecondary"
                   tabindex="0"
+                  title="Add Partner"
                   type="button"
                 >
                   <span
@@ -65,10 +66,11 @@ exports[`matches snapshot 1`] = `
                 <a
                   aria-disabled="false"
                   aria-label="chat"
-                  class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-22 MuiIconButton-colorSecondary"
+                  class="MuiButtonBase-root MuiIconButton-root makeStyles-btn-23 MuiIconButton-colorSecondary"
                   href="/chats/1-1"
                   role="link"
                   tabindex="0"
+                  title="Chat"
                 >
                   <span
                     class="MuiIconButton-label"
@@ -91,17 +93,17 @@ exports[`matches snapshot 1`] = `
               </div>
             </div>
             <div
-              class="makeStyles-langs-20"
+              class="makeStyles-langs-21"
             >
               <div
-                class="makeStyles-langSpace-21"
+                class="makeStyles-langSpace-22"
               >
                 Italian 
                 <div
                   aria-valuemax="100"
                   aria-valuemin="0"
                   aria-valuenow="100"
-                  class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-19 MuiLinearProgress-determinate"
+                  class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-20 MuiLinearProgress-determinate"
                   role="progressbar"
                 >
                   <div
@@ -116,7 +118,7 @@ exports[`matches snapshot 1`] = `
                   aria-valuemax="100"
                   aria-valuemin="0"
                   aria-valuenow="50"
-                  class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-19 MuiLinearProgress-determinate"
+                  class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-level-20 MuiLinearProgress-determinate"
                   role="progressbar"
                 >
                   <div
@@ -129,7 +131,7 @@ exports[`matches snapshot 1`] = `
           </div>
         </div>
         <p
-          class="MuiTypography-root makeStyles-bio-14 MuiTypography-body1 MuiTypography-colorTextSecondary"
+          class="MuiTypography-root makeStyles-bio-15 MuiTypography-body1 MuiTypography-colorTextSecondary"
         >
           Eos nobis autem sint ducimus illo.
         </p>
