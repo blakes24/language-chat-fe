@@ -1,3 +1,53 @@
+describe("Sign up", () => {
+  beforeEach(() => {
+    cy.clearLocalStorage();
+  });
+  it("lets a user sign up", () => {
+    cy.visit("/");
+    cy.contains("Sign Up").click();
+
+    cy.url().should("include", "/signup");
+
+    cy.get("#email")
+      .type("tester@mail.com")
+      .should("have.value", "tester@mail.com");
+    cy.get("#password").type("testerpw{enter}");
+
+    cy.get("#name").type("test").should("have.value", "test");
+    cy.get("#bio").type("stuff").should("have.value", "stuff");
+    cy.get("#mui-component-select-speaksLang").click();
+    cy.contains("English").click();
+    cy.get("#mui-component-select-learnsLang").click();
+    cy.contains("French").click();
+    cy.get("#mui-component-select-learnsLevel").click();
+    cy.contains("Beginner").click();
+    cy.contains("Create Account").click();
+
+    cy.location("pathname", { timeout: 10000 }).should(
+      "not.include",
+      "/signup"
+    );
+    cy.contains("Profile").click();
+    cy.get("h1").should("contain", "test");
+  });
+
+  it("displays error for missing credentials", () => {
+    cy.visit("/signup");
+    // enter password but no email
+    cy.get("#password").type("password{enter}");
+    cy.get("#email-helper-text").should("contain", "Required");
+
+    cy.get("#email").type("tester@mail.com{enter}");
+
+    //should show required if only spaces are entered
+    cy.get("#bio").type("  ");
+    cy.get("#name").type("  ");
+    cy.contains("Create Account").click();
+    cy.get("#name-helper-text").should("contain", "Required");
+    cy.get("#bio-helper-text").should("contain", "Required");
+  });
+});
+
 describe("Log in", () => {
   beforeEach(() => {
     cy.clearLocalStorage();
@@ -11,10 +61,9 @@ describe("Log in", () => {
     cy.url().should("include", "/login");
 
     cy.get("#email")
-      .type("nico1@mail.com")
-      .should("have.value", "nico1@mail.com");
-
-    cy.get("#password").type("nico1pw{enter}");
+      .type("tester@mail.com")
+      .should("have.value", "tester@mail.com");
+    cy.get("#password").type("testerpw{enter}");
 
     cy.get(".MuiCircularProgress-svg").should("be.visible");
     // wait for login response
@@ -38,64 +87,6 @@ describe("Log in", () => {
     cy.get("#password").type("badpassword{enter}");
 
     cy.contains("Invalid email/password");
-  });
-});
-
-describe("Sign up", () => {
-  beforeEach(() => {
-    cy.clearLocalStorage();
-  });
-  it("lets a user sign up and delete account", () => {
-    cy.visit("/");
-    cy.contains("Sign Up").click();
-
-    cy.url().should("include", "/signup");
-
-    cy.get("#email")
-      .type("tester@mail.com")
-      .should("have.value", "tester@mail.com");
-    cy.get("#password").type("testpw{enter}");
-
-    cy.get("#name").type("test").should("have.value", "test");
-    cy.get("#bio").type("stuff").should("have.value", "stuff");
-    cy.get("#mui-component-select-speaksLang").click();
-    cy.contains("English").click();
-    cy.get("#mui-component-select-learnsLang").click();
-    cy.contains("French").click();
-    cy.get("#mui-component-select-learnsLevel").click();
-    cy.contains("Beginner").click();
-    cy.contains("Create Account").click();
-
-    cy.location("pathname", { timeout: 10000 }).should(
-      "not.include",
-      "/signup"
-    );
-    cy.contains("Profile").click();
-    cy.get("h1").should("contain", "test");
-    cy.contains("Delete Account").click();
-    cy.get("#delete").click();
-
-    cy.location("pathname", { timeout: 10000 }).should(
-      "not.include",
-      "/profile"
-    );
-    cy.get("body").should("contain", "Practice with native speakers");
-  });
-
-  it("displays error for missing credentials", () => {
-    cy.visit("/signup");
-    // enter password but no email
-    cy.get("#password").type("password{enter}");
-    cy.get("#email-helper-text").should("contain", "Required");
-
-    cy.get("#email").type("tester@mail.com{enter}");
-
-    //should show required if only spaces are entered
-    cy.get("#bio").type("  ");
-    cy.get("#name").type("  ");
-    cy.contains("Create Account").click();
-    cy.get("#name-helper-text").should("contain", "Required");
-    cy.get("#bio-helper-text").should("contain", "Required");
   });
 });
 
@@ -168,57 +159,6 @@ describe("Home page", () => {
   });
 });
 
-
-describe("Edit Profile", () => {
-  beforeEach(() => {
-    cy.restoreLocalStorageCache();
-    cy.visit("/");
-  });
-
-  it("lets a user edit profile", () => {
-    cy.contains("Profile").click();
-
-    cy.get("h1").should("contain", "Nico");
-    cy.get("body").should("contain", "User Details");
-
-    cy.get("button[aria-label='edit user details']").click();
-    cy.get("#form-dialog-title").should("contain", "Edit Profile");
-    cy.get("#bio")
-      .clear()
-      .type("stuff about me")
-      .should("contain", "stuff about me");
-    cy.contains("Save Changes").click();
-
-    cy.get("body").should("contain", "stuff about me");
-  });
-
-  it("lets a user toggle active status", () => {
-    cy.contains("Profile").click();
-    
-    cy.get("body").should("contain", "active");
-    cy.get(".MuiSwitch-input").click();
-    cy.get("body").should("contain", "away");
-    cy.get(".MuiSwitch-input").click();
-    cy.get("body").should("contain", "active");
-  });
-
-  it("lets a user edit languages", () => {
-    cy.contains("Profile").click();
-
-    cy.get("[aria-label='edit native language']").click();
-    cy.get("#mui-component-select-speaks").click();
-    cy.get("li").contains("Korean").click();
-    cy.contains("Save Changes").click();
-    cy.get("body").should("contain", "Native Language: Korean");
-
-    cy.get("[aria-label='edit native language']").click();
-    cy.get("#mui-component-select-speaks").click();
-    cy.get("li").contains("Russian").click();
-    cy.contains("Save Changes").click();
-    cy.get("body").should("contain", "Native Language: Russian");
-  });
-});
-
 describe("Partners", () => {
   beforeEach(() => {
     cy.restoreLocalStorageCache();
@@ -232,6 +172,14 @@ describe("Partners", () => {
     cy.contains("Partners").click();
     cy.get("h1").should("contain", "Partners");
     cy.get("body").should("not.contain", "No partners yet");
+  });
+
+  it("lets a user delete a partner", () => {
+    cy.contains("Partners").click();
+    cy.get("body").should("not.contain", "No partners yet");
+
+    cy.get("button[aria-label='delete partner']").first().click();
+    cy.get("body").should("contain", "No partners yet");
   });
 });
 
@@ -250,4 +198,67 @@ describe("Chats", () => {
 
     cy.get("[aria-label='send']").should("not.be.disabled");
   });
+});
+
+describe("Edit Profile", () => {
+  beforeEach(() => {
+    cy.restoreLocalStorageCache();
+    cy.visit("/");
+  });
+
+  it("lets a user edit profile", () => {
+    cy.contains("Profile").click();
+
+    cy.get("h1").should("contain", "test");
+    cy.get("body").should("contain", "User Details");
+
+    cy.get("button[aria-label='edit user details']").click();
+    cy.get("#form-dialog-title").should("contain", "Edit Profile");
+    cy.get("#bio")
+      .clear()
+      .type("stuff about me")
+      .should("contain", "stuff about me");
+    cy.contains("Save Changes").click();
+
+    cy.get("body").should("contain", "stuff about me");
+  });
+
+  it("lets a user toggle active status", () => {
+    cy.contains("Profile").click();
+
+    cy.get("body").should("contain", "active");
+    cy.get(".MuiSwitch-input").click();
+    cy.get("body").should("contain", "away");
+    cy.get(".MuiSwitch-input").click();
+    cy.get("body").should("contain", "active");
+  });
+
+  it("lets a user edit languages", () => {
+    cy.contains("Profile").click();
+
+    cy.get("[aria-label='edit native language']").click();
+    cy.get("#mui-component-select-speaks").click();
+    cy.get("li").contains("Korean").click();
+    cy.contains("Save Changes").click();
+    cy.get("body").should("contain", "Native Language: Korean");
+
+    cy.get("[aria-label='edit learning language']").click();
+    cy.get("#mui-component-select-learning").click();
+    cy.get("li").contains("Russian").click();
+    cy.contains("Save Changes").click();
+    cy.get("body").should("contain", "Learning: Russian");
+  });
+
+  it("lets a user delete their profile", () => {
+    cy.contains("Profile").click();
+    cy.get("h1").should("contain", "test");
+    cy.contains("Delete Account").click();
+    cy.get("#delete").click();
+
+    cy.location("pathname", { timeout: 10000 }).should(
+      "not.include",
+      "/profile"
+    );
+    cy.get("body").should("contain", "Practice with native speakers");
+      });
 });

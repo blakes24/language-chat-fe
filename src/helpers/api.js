@@ -122,6 +122,17 @@ class ChatApi {
     return res;
   }
 
+  /** Deletes a partner */
+
+  static async deletePartner({ userId, partnerId }, data) {
+    let res = await this.request(
+      `users/${userId}/partners/${partnerId}`,
+      data,
+      "delete"
+    );
+    return res;
+  }
+
   /** Deletes a user */
 
   static async deleteUser(userId, data) {

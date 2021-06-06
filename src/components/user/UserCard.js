@@ -9,10 +9,14 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ChatIcon from "@material-ui/icons/Chat";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ChatApi from "../../helpers/api"
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Tooltip from "@material-ui/core/Tooltip";
+import { deletePartner } from "../../store/partnerSlice";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,13 +62,17 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     padding: ".5rem",
   },
+  tooltip: {
+    margin: 0,
+  },
 }));
 
 function UserCard({ cardUser, partner }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.users.current);
   const [toastOpen, setToastOpen] = useState(false);
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
   const path =
     user.id < cardUser.id
       ? `/chats/${user.id}-${cardUser.id}`
@@ -74,16 +82,24 @@ function UserCard({ cardUser, partner }) {
     setToastOpen(false);
   };
 
+  const handleToastOpen = (msg) => {
+    setMessage(msg);
+    setToastOpen(true);
+  };
+
   async function handleAddPartner(){
     try {
       await ChatApi.addPartner(user.id, {partnerId: cardUser.id})
-      setToastOpen(true)
+      handleToastOpen("Partner Added!");
     } catch (err) {
       const msg = Array.isArray(err) ? err[0] : err.message
-      setError(msg)
-      setToastOpen(true);
+      handleToastOpen(msg);
       console.error(err)
     }
+  }
+
+  function handleDeletePartner() {
+    dispatch(deletePartner({ userId: user.id, partnerId: cardUser.id }));
   }
 
   return (
@@ -106,26 +122,41 @@ function UserCard({ cardUser, partner }) {
                 {cardUser.name}{" "}
               </Typography>
               <div>
-                {!partner && (
-                  <IconButton
-                    color="secondary"
-                    aria-label="add partner"
-                    className={classes.btn}
-                    onClick={handleAddPartner}
-                  >
-                    <PersonAddIcon />
-                  </IconButton>
+                {partner ? (
+                  <Tooltip title="Delete Partner" placement="top">
+                    <IconButton
+                      color="secondary"
+                      aria-label="delete partner"
+                      className={classes.btn}
+                      onClick={handleDeletePartner}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Add Partner" placement="top">
+                    <IconButton
+                      color="secondary"
+                      aria-label="add partner"
+                      className={classes.btn}
+                      onClick={handleAddPartner}
+                    >
+                      <PersonAddIcon />
+                    </IconButton>
+                  </Tooltip>
                 )}
-                <IconButton
-                  component={Link}
-                  color="secondary"
-                  aria-label="chat"
-                  className={classes.btn}
-                  to={path}
-                  role="link"
-                >
-                  <ChatIcon />
-                </IconButton>
+                <Tooltip title="Chat" placement="top">
+                  <IconButton
+                    component={Link}
+                    color="secondary"
+                    aria-label="chat"
+                    className={classes.btn}
+                    to={path}
+                    role="link"
+                  >
+                    <ChatIcon />
+                  </IconButton>
+                </Tooltip>
               </div>
             </div>
 
@@ -164,7 +195,7 @@ function UserCard({ cardUser, partner }) {
         open={toastOpen}
         autoHideDuration={5000}
         onClose={handleClose}
-        message={error ? error : "Partner added!"}
+        message={message}
         action={
           <IconButton
             size="small"
