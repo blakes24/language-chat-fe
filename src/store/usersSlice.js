@@ -62,18 +62,6 @@ export const updateLearning = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (userId, { rejectWithValue }) => {
-    try {
-      const response = await ChatApi.deleteUser(userId);
-      return response;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
-
 export const usersSlice = createSlice({
   name: "users",
   initialState: {
@@ -175,25 +163,6 @@ export const usersSlice = createSlice({
       }
     },
     [updateLearning.rejected]: (state, action) => {
-      if (state.loading === "pending") {
-        state.loading = "idle";
-        state.error = action.payload;
-      }
-    },
-    [deleteUser.pending]: (state, action) => {
-      if (state.loading === "idle") {
-        state.error = null;
-        state.loading = "pending";
-      }
-    },
-    [deleteUser.fulfilled]: (state, action) => {
-      if (state.loading === "pending") {
-        state.loading = "idle";
-        state.current = null;
-        state.token = "";
-      }
-    },
-    [deleteUser.rejected]: (state, action) => {
       if (state.loading === "pending") {
         state.loading = "idle";
         state.error = action.payload;
