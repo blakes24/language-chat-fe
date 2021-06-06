@@ -1,29 +1,23 @@
 import ImageUploader from "./ImageUploader";
-import {
-  Container,
-  Typography,
-  Grid,
-  makeStyles,
-  LinearProgress,
-  IconButton,
-  Button,
-  DialogActions,
-  DialogContentText,
-} from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { makeStyles } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 import Switch from "@material-ui/core/Switch";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentUser, deleteUser } from "../../store/usersSlice";
-import { setLocalStorage } from "../../helpers/localStorage";
+import { updateCurrentUser } from "../../store/usersSlice";
 import EditUserModal from "./EditUserModal";
 import EditLangModal from "./EditLangModal";
-import { useHistory } from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import CloseIcon from "@material-ui/icons/Close";
+import DeleteUserModal from "./DeleteUserModal";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,8 +64,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   const user = useSelector((state) => state.users.current);
-  const loading = useSelector((state) => state.users.loading);
-  const error = useSelector((state) => state.users.error);
   const classes = useStyles();
   const [langOpen, setLangOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -79,7 +71,7 @@ function Profile() {
   const [toastOpen, setToastOpen] = useState(false);
   const [langType, setLangType] = useState("speaks");
   const dispatch = useDispatch();
-  const history = useHistory();
+  const [toastMsg, setToastMsg] = useState("");
 
   const handleSpeaksOpen = () => {
     setLangType("speaks");
@@ -102,22 +94,21 @@ function Profile() {
     dispatch(updateCurrentUser({ active: !user.active, id: user.id }));
   };
 
-  const deleteAccount = () => {
-    dispatch(deleteUser(user.id));
-    if (loading === "idle" && !error) {
-      setLocalStorage("token", "");
-      history.push("/")
-    } else {
-      setToastOpen(true);
-      setDeleteOpen(false);
-    }
+  const handleToast = (msg) => {
+    setToastOpen(true);
+    setToastMsg(msg);
   };
 
   return (
     <Container className={classes.root}>
-      {user &&
-        (<>
-          <Typography align="center" variant="h3" component="h1" color="secondary">
+      {user && (
+        <>
+          <Typography
+            align="center"
+            variant="h3"
+            component="h1"
+            color="secondary"
+          >
             {user.name}{" "}
             <FormControlLabel
               control={
@@ -231,35 +222,11 @@ function Profile() {
             type={langType}
             handleClose={handleLangClose}
           />
-          <Dialog
+          <DeleteUserModal
             open={deleteOpen}
-            onClose={() => setDeleteOpen(false)}
-            aria-labelledby="delete-alert"
-          >
-            <DialogContent>
-              <DialogContentText id="delete-alert" color="secondary">
-                Are you sure you want to delete your account?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => setDeleteOpen(false)}
-                variant="contained"
-                color="secondary"
-                id="cancel"
-              >
-                Cancel
-              </Button>
-              <Button
-                id="delete"
-                onClick={deleteAccount}
-                color="primary"
-                variant="contained"
-              >
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
+            handleClose={() => setDeleteOpen(false)}
+            handleToast={handleToast}
+          />
           <Snackbar
             anchorOrigin={{
               vertical: "bottom",
@@ -268,7 +235,7 @@ function Profile() {
             open={toastOpen}
             autoHideDuration={5000}
             onClose={() => setToastOpen(false)}
-            message={error ? error : "Account"}
+            message={toastMsg}
             action={
               <IconButton
                 size="small"
@@ -281,7 +248,7 @@ function Profile() {
             }
           />
         </>
-        )}
+      )}
     </Container>
   );
 }
