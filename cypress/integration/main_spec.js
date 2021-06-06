@@ -87,6 +87,15 @@ describe("Sign up", () => {
     // enter password but no email
     cy.get("#password").type("password{enter}");
     cy.get("#email-helper-text").should("contain", "Required");
+
+    cy.get("#email").type("tester@mail.com{enter}");
+
+    //should show required if only spaces are entered
+    cy.get("#bio").type("  ");
+    cy.get("#name").type("  ");
+    cy.contains("Create Account").click();
+    cy.get("#name-helper-text").should("contain", "Required");
+    cy.get("#bio-helper-text").should("contain", "Required");
   });
 });
 
