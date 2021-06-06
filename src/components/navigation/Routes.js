@@ -13,7 +13,7 @@ import NavWrapper from "../navigation/NavWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentUser } from "../../store/usersSlice";
 import { logoutUser } from "../../store/root";
-import NotFound from "../NotFound";
+import NotFound from "./NotFound";
 
 function Routes() {
   const dispatch = useDispatch();

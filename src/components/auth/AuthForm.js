@@ -18,7 +18,9 @@ const validate = (values) => {
   }
   if (!values.password) {
     errors.password = "Required";
-  }
+  } else if (values.password.includes(' ')) {
+    errors.password = "Invalid password (cannot contain spaces)"
+  } 
   return errors;
 };
 

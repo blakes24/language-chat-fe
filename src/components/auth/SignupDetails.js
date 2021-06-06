@@ -11,10 +11,10 @@ import { setLocalStorage } from "../../helpers/localStorage";
 
 const validate = (values) => {
   const errors = {};
-  if (!values.name) {
+  if (!values.name.trim()) {
     errors.name = "Required";
   }
-  if (!values.bio) {
+  if (!values.bio.trim()) {
     errors.bio = "Required";
   }
   return errors;
