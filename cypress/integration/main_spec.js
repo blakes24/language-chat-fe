@@ -3,6 +3,8 @@ describe("Sign up", () => {
     cy.clearLocalStorage();
   });
   it("lets a user sign up", () => {
+    cy.intercept("POST", "/auth/register").as("signup");
+
     cy.visit("/");
     cy.contains("Sign Up").click();
 
@@ -22,6 +24,9 @@ describe("Sign up", () => {
     cy.get("#mui-component-select-learnsLevel").click();
     cy.contains("Beginner").click();
     cy.contains("Create Account").click();
+
+    //wait for signup to return
+    cy.wait("@signup");
 
     cy.location("pathname", { timeout: 10000 }).should(
       "not.include",
