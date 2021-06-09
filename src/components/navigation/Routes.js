@@ -32,6 +32,7 @@ function Routes() {
           dispatch(fetchCurrentUser(userId));
         } catch (err) {
           console.error(err);
+          dispatch(logoutUser());
         }
       }
     }
