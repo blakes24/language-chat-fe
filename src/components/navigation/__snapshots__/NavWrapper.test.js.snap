@@ -3,17 +3,17 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="makeStyles-root-14"
+    class="makeStyles-root-15"
   >
     <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-16 mui-fixed MuiPaper-elevation0"
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-17 mui-fixed MuiPaper-elevation0"
     >
       <div
         class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
       >
         <button
           aria-label="open drawer"
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-17 MuiIconButton-colorInherit MuiIconButton-edgeStart"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-18 MuiIconButton-colorInherit MuiIconButton-edgeStart"
           tabindex="0"
           type="button"
         >
@@ -36,7 +36,7 @@ exports[`matches snapshot 1`] = `
           />
         </button>
         <h6
-          class="MuiTypography-root makeStyles-title-22 MuiTypography-h6"
+          class="MuiTypography-root makeStyles-title-23 MuiTypography-h6"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorInherit"
@@ -45,29 +45,47 @@ exports[`matches snapshot 1`] = `
             LangChat
           </a>
         </h6>
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link-22 MuiTypography-colorInherit"
+          href="/profile"
+        >
+          Test
+        </a>
+        <a
+          aria-label="view profile"
+          class="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-26"
+          href="/profile"
+          role="link"
+        >
+          <img
+            alt="Test"
+            class="MuiAvatar-img"
+            src="https://cdn.fakercloud.com/avatars/happypeter1983_128.jpg"
+          />
+        </a>
       </div>
     </header>
     <nav
       aria-label="navigation"
-      class="makeStyles-drawer-15"
+      class="makeStyles-drawer-16"
     />
     <main
-      class="makeStyles-content-20"
+      class="makeStyles-content-21"
     >
       <div
-        class="makeStyles-toolbar-18"
+        class="makeStyles-toolbar-19"
       />
     </main>
   </div>
   <footer
-    class="makeStyles-root-25"
+    class="makeStyles-root-27"
   >
     <div>
       <p>
         © LangChat
       </p>
       <a
-        class="makeStyles-link-26"
+        class="makeStyles-link-28"
         href="http://www.freepik.com"
       >
         Graphics designed by stories/Freepik

@@ -26,6 +26,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ChatIcon from "@material-ui/icons/Chat";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
+import Avatar from "@material-ui/core/Avatar";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
@@ -73,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     marginTop: "1rem",
+  },
+  avatar: {
+    height: "30px",
+    width: "30px",
+    marginLeft: ".5rem",
+    textDecoration: "none",
   },
 }));
 
@@ -214,7 +221,28 @@ function NavWrapper({ window, children }) {
                   LangChat
                 </Link>
               </Typography>
-              {!user && (
+              {user ? (
+                <>
+                  <Link
+                    component={RouterLink}
+                    to="/profile"
+                    color="inherit"
+                    className={classes.link}
+                  >
+                    {user.name}
+                  </Link>
+                  <Avatar
+                    alt={user.name}
+                    src={user.imageUrl || "letter"}
+                    className={classes.avatar}
+                    // variant="rounded"
+                    component={RouterLink}
+                    to="/profile"
+                    aria-label="view profile"
+                    role="link"
+                  />
+                </>
+              ) : (
                 <>
                   <Link
                     component={RouterLink}

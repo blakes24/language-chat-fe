@@ -102,7 +102,12 @@ function Dashboard() {
         </FormControl>
       </Container>
       {loading === "pending" && <Loading solid />}
-      {error && error.map((err) => <p className={classes.err}>{err}</p>)}
+      {error &&
+        error.map((err, idx) => (
+          <p className={classes.err} key={idx}>
+            {err}
+          </p>
+        ))}
       {users.length > 0 && <UserList users={users} />}
     </Container>
   );
