@@ -17,7 +17,6 @@ class ChatApi {
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
-      console.error("API Error:", err.response);
       let message = err.response
         ? err.response.data.error.message
         : "Server error: try again later";

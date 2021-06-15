@@ -32,8 +32,8 @@ describe("Sign up", () => {
       "not.include",
       "/signup"
     );
-    cy.contains("Profile").click();
-    cy.get("h1").should("contain", "test");
+
+    cy.get(".MuiToolbar-root").should("contain", "test");
   });
 
   it("displays error for missing credentials", () => {
@@ -75,6 +75,8 @@ describe("Log in", () => {
     cy.wait("@login");
 
     cy.get("h1").should("contain", "Find a partner");
+
+    cy.get(".MuiToolbar-root").should("contain", "test");
 
     cy.saveLocalStorageCache();
 
@@ -145,7 +147,7 @@ describe("Home page", () => {
     cy.contains("Home").click();
     cy.get("h1").should("contain", "Find a partner and start chatting!");
 
-    cy.get(".MuiAvatar-root").first().click();
+    cy.get("[aria-label='chat']").first().click();
     cy.url().should("include", "/chats");
 
     cy.contains("Log Out").click();
