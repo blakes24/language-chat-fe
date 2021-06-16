@@ -13,10 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    height: "calc(100% - 56px)",
-    [theme.breakpoints.up("sm")]: {
-      height: "calc(100% - 64px)",
-    },
+    height: "calc(100% - 72px)",
     margin: 0,
     padding: 0,
   },
