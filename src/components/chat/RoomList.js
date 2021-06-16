@@ -6,10 +6,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
 import { NavLink } from "react-router-dom";
-import { Badge } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
+import ChatAvatar from "./ChatAvatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,14 +25,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     paddingLeft: ".1rem",
   },
-  letter: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  badgeActive: {
-    backgroundColor: theme.palette.success.main,
-  },
-  badgeAway: {
-    backgroundColor: "#aeb5b8",
+  top: {
+    height: "4rem",
   },
 }));
 
@@ -41,7 +34,7 @@ function RoomList({ rooms }) {
   const classes = useStyles();
   return (
     <List className={classes.root}>
-      <ListItem>
+      <ListItem className={classes.top}>
         <ListItemIcon className={classes.icon}>
           <PeopleIcon />
         </ListItemIcon>
@@ -58,22 +51,7 @@ function RoomList({ rooms }) {
             className={classes.item}
           >
             <ListItemAvatar className={classes.avatar}>
-              <Badge
-                variant="dot"
-                badgeContent=" "
-                color="default"
-                classes={
-                  room.partner.active
-                    ? { badge: classes.badgeActive }
-                    : { badge: classes.badgeAway }
-                }
-              >
-                <Avatar
-                  alt={room.partner.name}
-                  src={room.partner.imageUrl || "letter"}
-                  className={classes.letter}
-                />
-              </Badge>
+              <ChatAvatar partner={room.partner} />
             </ListItemAvatar>
             <ListItemText primary={room.partner.name} />
           </ListItem>

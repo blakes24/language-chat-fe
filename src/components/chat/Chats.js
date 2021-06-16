@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Container, Divider, Typography } from "@material-ui/core";
 import RoomList from "./RoomList";
 import ChatRoom from "./ChatRoom";
+import ChatAvatar from "./ChatAvatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,11 +41,20 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     padding: ".5rem 0",
+    marginLeft: ".5rem",
   },
   chatContainer: {
     padding: 0,
     margin: 0,
     width: "100%",
+  },
+  partner: {
+    marginTop: ".5rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "4rem",
   },
 }));
 
@@ -90,14 +100,29 @@ function Chats() {
           {rooms.length > 0 && <RoomList rooms={rooms} />}
         </div>
         <Container className={classes.chatContainer}>
-          <Typography
-            className={classes.title}
-            component={"h1"}
-            variant="h4"
-            align="center"
-          >
-            {currentRoom ? currentRoom.partner.name : "Chat"}
-          </Typography>{" "}
+          {currentRoom ? (
+            <div className={classes.partner}>
+              <ChatAvatar partner={currentRoom.partner} size="large" />
+              <Typography
+                className={classes.title}
+                component={"h1"}
+                variant="h6"
+                align="center"
+              >
+                {currentRoom.partner.name}
+              </Typography>
+            </div>
+          ) : (
+            <Typography
+              className={classes.title}
+              component={"h1"}
+              variant="h3"
+              align="center"
+            >
+              Chat
+            </Typography>
+          )}
+
           <Divider />
           {error &&
             Array.isArray(error) &&

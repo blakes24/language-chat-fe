@@ -3,23 +3,22 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root makeStyles-root-6 MuiContainer-maxWidthXl"
+    class="MuiContainer-root makeStyles-root-7 MuiContainer-maxWidthXl"
   >
     <div
-      class="makeStyles-chat-8"
+      class="makeStyles-chat-9"
     >
       <div
-        class="makeStyles-list-7"
+        class="makeStyles-list-8"
       />
       <div
-        class="MuiContainer-root makeStyles-chatContainer-10 MuiContainer-maxWidthLg"
+        class="MuiContainer-root makeStyles-chatContainer-11 MuiContainer-maxWidthLg"
       >
         <h1
-          class="MuiTypography-root makeStyles-title-9 MuiTypography-h4 MuiTypography-alignCenter"
+          class="MuiTypography-root makeStyles-title-10 MuiTypography-h3 MuiTypography-alignCenter"
         >
           Chat
         </h1>
-         
         <hr
           class="MuiDivider-root"
         />
