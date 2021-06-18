@@ -4,6 +4,7 @@ describe("Sign up", () => {
   });
   it("lets a user sign up", () => {
     cy.intercept("POST", "/auth/register").as("signup");
+    cy.intercept("PATCH", "/auth/verify-email").as("verify");
 
     cy.visit("/");
     cy.contains("Sign Up").click();
@@ -11,9 +12,9 @@ describe("Sign up", () => {
     cy.url().should("include", "/signup");
 
     cy.get("#email")
-      .type("tester@mail.com")
-      .should("have.value", "tester@mail.com");
-    cy.get("#password").type("testerpw{enter}");
+      .type("cytester@mail.com")
+      .should("have.value", "cytester@mail.com");
+    cy.get("#password").type("cytesterpw{enter}");
 
     cy.get("#name").type("test").should("have.value", "test");
     cy.get("#bio").type("stuff").should("have.value", "stuff");
@@ -28,11 +29,20 @@ describe("Sign up", () => {
     //wait for signup to return
     cy.wait("@signup");
 
-    cy.location("pathname", { timeout: 10000 }).should(
-      "not.include",
-      "/signup"
+    cy.location("pathname").should("not.include", "/signup");
+
+    cy.location("pathname").should("include", "/verify");
+
+    cy.get("body").should("contain", "A verification link has been sent");
+
+    cy.visit(
+      "/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN5dGVzdGVyQG1haWwuY29tIiwiaWF0IjoxNjI0MDQ0MzQwfQ.OqC0KLX_oWbB_fWXN1mADAqZnvamV9zUJta-ctE82LA"
     );
 
+    cy.contains("Verify").click();
+    //wait for email verification to return
+    cy.wait("@verify");
+    cy.get("body").should("contain", "Your account has been verified.");
     cy.get(".MuiToolbar-root").should("contain", "test");
   });
 
@@ -42,7 +52,7 @@ describe("Sign up", () => {
     cy.get("#password").type("password{enter}");
     cy.get("#email-helper-text").should("contain", "Required");
 
-    cy.get("#email").type("tester@mail.com{enter}");
+    cy.get("#email").type("cytester@mail.com{enter}");
 
     //should show required if only spaces are entered
     cy.get("#bio").type("  ");
@@ -50,6 +60,18 @@ describe("Sign up", () => {
     cy.contains("Create Account").click();
     cy.get("#name-helper-text").should("contain", "Required");
     cy.get("#bio-helper-text").should("contain", "Required");
+  });
+
+  it("displays error for invalid verification link", () => {
+    cy.intercept("PATCH", "/auth/verify-email").as("verify");
+    cy.visit("/verify/badlink");
+    cy.contains("Verify").click();
+    //wait for email verification to return
+    cy.wait("@verify");
+    cy.get("body").should(
+      "contain",
+      "Verification link is expired or invalid."
+    );
   });
 });
 
@@ -66,9 +88,9 @@ describe("Log in", () => {
     cy.url().should("include", "/login");
 
     cy.get("#email")
-      .type("tester@mail.com")
-      .should("have.value", "tester@mail.com");
-    cy.get("#password").type("testerpw{enter}");
+      .type("cytester@mail.com")
+      .should("have.value", "cytester@mail.com");
+    cy.get("#password").type("cytesterpw{enter}");
 
     cy.get(".MuiCircularProgress-svg").should("be.visible");
     // wait for login response
@@ -113,6 +135,10 @@ describe("Redirects", () => {
     cy.get("body").should("contain", "Practice with native speakers");
 
     cy.visit("/partners");
+    cy.url().should("not.include", "/partners");
+    cy.get("body").should("contain", "Practice with native speakers");
+
+    cy.visit("/verify");
     cy.url().should("not.include", "/partners");
     cy.get("body").should("contain", "Practice with native speakers");
   });

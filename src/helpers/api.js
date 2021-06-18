@@ -41,8 +41,27 @@ class ChatApi {
 
   /** Verifies that the social token provided is valid */
 
-  static async verify(token) {
+  static async validate(token) {
     let res = await this.request(`auth/validate`, token, "post");
+    return res;
+  }
+
+  /** Verifies user's email address */
+
+  static async verifyEmail(token) {
+    let res = await this.request(`auth/verify-email`, { token }, "patch");
+    this.token = res.token;
+    return res.token;
+  }
+
+  /** Verifies user's email address */
+
+  static async resendEmail(userId) {
+    let res = await this.request(
+      `auth/resend-verification`,
+      { userId },
+      "post"
+    );
     return res;
   }
 
