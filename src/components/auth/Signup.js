@@ -37,7 +37,7 @@ function Signup() {
     setFormPage(2);
   }
   async function facebookSignup(user) {
-    await ChatApi.verify({
+    await ChatApi.validate({
       provider: "facebook",
       token: user._token.accessToken,
     });
@@ -52,7 +52,7 @@ function Signup() {
     setFormPage(2);
   }
   async function googleSignup(user) {
-    await ChatApi.verify({
+    await ChatApi.validate({
       provider: "google",
       token: user._token.idToken,
     });

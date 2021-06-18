@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root makeStyles-root-3 MuiContainer-maxWidthSm"
+  >
+    <h1
+      class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom MuiTypography-alignCenter"
+    >
+      Welcome to LangChat
+    </h1>
+    <p>
+      Click the button below to verify your account.
+    </p>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btn-4 MuiButton-containedPrimary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Verify
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</DocumentFragment>
+`;

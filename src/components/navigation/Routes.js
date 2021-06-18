@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentUser } from "../../store/usersSlice";
 import { logoutUser } from "../../store/root";
 import NotFound from "./NotFound";
+import VerifyEmail from "../auth/VerifyEmail";
 
 function Routes() {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ function Routes() {
           const userId = jwtDecode(token).userId;
           dispatch(fetchCurrentUser(userId));
         } catch (err) {
-          console.error(err);
           dispatch(logoutUser());
         }
       }
@@ -43,25 +43,39 @@ function Routes() {
     <NavWrapper>
       <Switch>
         <Route exact path="/">
-          {user ? <Dashboard /> : <LandingPage />}
+          {user ? (
+            user.verified ? (
+              <Dashboard />
+            ) : (
+              <Redirect to="/verify" />
+            )
+          ) : (
+            <LandingPage />
+          )}
         </Route>
         <Route exact path="/profile">
-          {user ? <Profile /> : <Redirect to="/" />}
+          {user && user.verified ? <Profile /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/partners">
-          {user ? <Partners /> : <Redirect to="/" />}
+          {user && user.verified ? <Partners /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/chats/:roomId">
-          {user ? <Chats /> : <Redirect to="/" />}
+          {user && user.verified ? <Chats /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/chats">
-          {user ? <Chats /> : <Redirect to="/" />}
+          {user && user.verified ? <Chats /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/signup">
           <Signup />
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/verify/:code">
+          <VerifyEmail />
+        </Route>
+        <Route exact path="/verify">
+          {user ? <VerifyEmail /> : <Redirect to="/" />}
         </Route>
         <Route>
           <NotFound />
