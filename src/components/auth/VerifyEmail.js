@@ -8,6 +8,7 @@ import { setToken } from "../../store/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { useState } from "react";
+import Loading from "../Loading";
 
 function VerifyEmail() {
   const classes = useStyles();
@@ -17,24 +18,36 @@ function VerifyEmail() {
   const user = useSelector((state) => state.users.current);
   const [failed, setFailed] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("Verification link is expired or invalid.");
 
   async function verify() {
     try {
+      setLoading(true);
       let res = await ChatApi.verifyEmail(code);
       setLocalStorage("token", res);
       dispatch(setToken(res));
       setSuccess(true);
+      setLoading(false);
     } catch (err) {
+      let errMsg =
+        err[0] === "Invalid token"
+          ? "Verification link is expired or invalid."
+          : err[0];
+      setMsg(errMsg);
+      setLoading(false);
       setFailed(true);
     }
   }
   async function resend() {
     try {
+      setLoading(true);
       await ChatApi.resendEmail(user.id);
       setFailed(false);
       history.push("/verify");
     } catch (err) {
-      return <p>{err[0]}</p>;
+      setLoading(false);
+      setMsg(err[0]);
     }
   }
 
@@ -47,7 +60,8 @@ function VerifyEmail() {
 
   const failedMsg = (
     <div className={classes.root}>
-      <p>Verification link is expired or invalid.</p>
+      {loading && <Loading />}
+      <p>{msg}</p>
       {user ? (
         <Button
           variant="contained"
@@ -70,6 +84,7 @@ function VerifyEmail() {
 
   return (
     <Container maxWidth="sm" className={classes.root}>
+      {loading && <Loading />}
       <Typography gutterBottom variant="h5" component="h1" align="center">
         Welcome to LangChat
       </Typography>

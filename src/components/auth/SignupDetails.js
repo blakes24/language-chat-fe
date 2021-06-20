@@ -8,6 +8,8 @@ import ChatApi from "../../helpers/api";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../store/usersSlice";
 import { setLocalStorage } from "../../helpers/localStorage";
+import { useState } from "react";
+import Loading from "../Loading";
 
 const validate = (values) => {
   const errors = {};
@@ -30,6 +32,7 @@ function SignupDetails({
 }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -47,11 +50,18 @@ function SignupDetails({
     validate,
     onSubmit: async (values) => {
       try {
+        setLoading(true)
         const res = await ChatApi.register(values);
         dispatch(setToken(res));
         setLocalStorage("token", res);
-        history.push("/");
+        if  (values.socialId) {
+          history.push("/");
+        } else {
+          history.push("/verify");
+        }
+        
       } catch (err) {
+        setLoading(false);
         formik.errors.name = err;
       }
     },
@@ -80,6 +90,8 @@ function SignupDetails({
   const classes = useStyles();
 
   return (
+    <>
+    {loading && <Loading />}
     <FormikProvider value={formik}>
       <form
         className={classes.root}
@@ -160,6 +172,7 @@ function SignupDetails({
         </Button>
       </form>
     </FormikProvider>
+    </>
   );
 }
 
