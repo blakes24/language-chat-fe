@@ -1,24 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./ChatAvatarStyles";
 import Avatar from "@material-ui/core/Avatar";
 import { Badge } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  small: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  large: {
-    backgroundColor: theme.palette.primary.main,
-    height: 55,
-    width: 55,
-  },
-  badgeActive: {
-    backgroundColor: theme.palette.success.main,
-  },
-  badgeAway: {
-    backgroundColor: "#aeb5b8",
-  },
-}));
 
 function ChatAvatar({ partner, size = "small" }) {
   const classes = useStyles();

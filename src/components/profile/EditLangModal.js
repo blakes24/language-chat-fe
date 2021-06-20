@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useFormik, FormikProvider } from "formik";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./EditLangModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSpeaks, updateLearning } from "../../store/usersSlice";
 import FormikSelect from "../FormikSelect";
@@ -22,17 +22,6 @@ const validate = (values) => {
   }
   return errors;
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
 
 export default function EditLangModal({ open, handleClose, type }) {
   const dispatch = useDispatch();

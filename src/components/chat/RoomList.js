@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./RoomListStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -9,26 +9,6 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import { NavLink } from "react-router-dom";
 import PeopleIcon from "@material-ui/icons/People";
 import ChatAvatar from "./ChatAvatar";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    paddingBottom: 0,
-    paddingTop: 9,
-  },
-  item: {
-    padding: "8px 10px",
-  },
-  avatar: {
-    marginTop: ".2rem",
-  },
-  icon: {
-    paddingLeft: ".1rem",
-  },
-  top: {
-    height: "4rem",
-  },
-}));
 
 function RoomList({ rooms }) {
   const classes = useStyles();

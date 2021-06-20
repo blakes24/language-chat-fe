@@ -1,29 +1,19 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
 import {
   Link as RouterLink,
   useRouteMatch,
   useHistory,
 } from "react-router-dom";
-import HomeIcon from "@material-ui/icons/Home";
-import PeopleIcon from "@material-ui/icons/People";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ChatIcon from "@material-ui/icons/Chat";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import Avatar from "@material-ui/core/Avatar";
@@ -31,57 +21,8 @@ import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { logoutUser } from "../../store/root";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    paddingBottom: "env(safe-area-inset-bottom)",
-  },
-  drawer: {
-    [theme.breakpoints.up("md")]: {
-      width: 220,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: 220,
-    backgroundColor: theme.palette.secondary.light,
-  },
-  content: {
-    flexGrow: 1,
-    minHeight: "100vh",
-  },
-  link: {
-    marginLeft: theme.spacing(2),
-    fontSize: "1rem",
-  },
-  title: {
-    flexGrow: 1,
-  },
-  list: {
-    margin: "1rem",
-  },
-  listItem: {
-    marginTop: "1rem",
-  },
-  avatar: {
-    height: "30px",
-    width: "30px",
-    marginLeft: ".5rem",
-    textDecoration: "none",
-  },
-}));
+import NavDrawer from "./NavDrawer";
+import { useStyles } from "./NavWrapperStyles";
 
 function HideOnScroll({ children }) {
   const trigger = useScrollTrigger();
@@ -117,78 +58,6 @@ function NavWrapper({ window, children }) {
   const closeDrawer = () => {
     setMobileOpen(false);
   };
-
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider />
-      <List className={classes.list}>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/"
-          key={"home"}
-          className={classes.listItem}
-          onClick={closeDrawer}
-        >
-          <ListItemIcon>
-            <HomeIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText primary={"Home"} />
-        </ListItem>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/partners"
-          key={"partners"}
-          className={classes.listItem}
-          onClick={closeDrawer}
-        >
-          <ListItemIcon>
-            <PeopleIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText primary={"Partners"} />
-        </ListItem>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/chats"
-          key={"chats"}
-          className={classes.listItem}
-          onClick={closeDrawer}
-        >
-          <ListItemIcon>
-            <ChatIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText primary={"Chats"} />
-        </ListItem>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/profile"
-          key={"profile"}
-          className={classes.listItem}
-          onClick={closeDrawer}
-        >
-          <ListItemIcon>
-            <AccountCircleIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText primary={"Profile"} />
-        </ListItem>
-        <ListItem
-          button
-          key={"logout"}
-          onClick={logout}
-          className={classes.listItem}
-        >
-          <ListItemIcon>
-            <ExitToAppIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText primary={"Log Out"} />
-        </ListItem>
-      </List>
-    </div>
-  );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -235,7 +104,6 @@ function NavWrapper({ window, children }) {
                     alt={user.name}
                     src={user.imageUrl || "letter"}
                     className={classes.avatar}
-                    // variant="rounded"
                     component={RouterLink}
                     to="/profile"
                     aria-label="view profile"
@@ -281,7 +149,7 @@ function NavWrapper({ window, children }) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
               >
-                {drawer}
+                <NavDrawer logout={logout} closeDrawer={closeDrawer} />
               </Drawer>
             </Hidden>
             <Hidden smDown>
@@ -292,7 +160,7 @@ function NavWrapper({ window, children }) {
                 variant="permanent"
                 open
               >
-                {drawer}
+                <NavDrawer logout={logout} closeDrawer={closeDrawer} />
               </Drawer>
             </Hidden>
           </nav>

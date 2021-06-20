@@ -4,7 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useFormik, FormikProvider } from "formik";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./EditUserModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentUser } from "../../store/usersSlice";
 
@@ -23,22 +23,6 @@ const validate = (values) => {
   }
   return errors;
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "25ch",
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
 
 export default function EditUserModal({ open, handleClose }) {
   const dispatch = useDispatch();

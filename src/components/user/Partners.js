@@ -2,29 +2,11 @@ import { useEffect } from "react";
 import UserList from "../user/UserList";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPartners } from "../../store/partnerSlice";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
-
-const useStyles = makeStyles({
-  root: {
-    marginTop: "1.5rem",
-    marginBottom: ".5rem",
-  },
-  formControl: {
-    marginBottom: ".5rem",
-    minWidth: 240,
-  },
-  formContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  err: {
-    textAlign: "center",
-  },
-});
+import { useStyles } from "./PartnersStyles";
 
 function Partners() {
   const classes = useStyles();

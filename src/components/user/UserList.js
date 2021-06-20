@@ -1,15 +1,6 @@
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./UserListStyles";
 import UserCard from "./UserCard";
-
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    padding: 0,
-    margin: "0 auto",
-    maxWidth: "700px",
-  },
-});
 
 function UserList({ users, partner }) {
   const classes = useStyles();

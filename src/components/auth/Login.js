@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./LoginStyles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import { useHistory } from "react-router-dom";
@@ -8,23 +8,6 @@ import { setToken } from "../../store/usersSlice";
 import ChatApi from "../../helpers/api";
 import Card from "@material-ui/core/Card";
 import { setLocalStorage } from "../../helpers/localStorage";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "90vh",
-    minHeight: "500px",
-  },
-  card: {
-    padding: "1rem",
-  },
-  error: {
-    color: theme.palette.error.main,
-  },
-}));
 
 function Login() {
   const classes = useStyles();
