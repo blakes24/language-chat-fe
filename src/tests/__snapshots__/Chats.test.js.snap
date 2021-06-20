@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root makeStyles-root-8 MuiContainer-maxWidthXl"
+  >
+    <div
+      class="makeStyles-chat-10"
+    >
+      <div
+        class="makeStyles-list-9"
+      />
+      <div
+        class="MuiContainer-root makeStyles-chatContainer-12 MuiContainer-maxWidthLg"
+      >
+        <h1
+          class="MuiTypography-root makeStyles-title-11 MuiTypography-h3 MuiTypography-alignCenter"
+        >
+          Chat
+        </h1>
+        <hr
+          class="MuiDivider-root"
+        />
+        <p
+          class="MuiTypography-root makeStyles-empty-14 MuiTypography-body1 MuiTypography-alignCenter"
+        >
+          Select a user to start chatting.
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

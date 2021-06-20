@@ -1,24 +1,7 @@
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./LandingPageStyles";
 import Grid from "@material-ui/core/Grid";
 import Hero from "./Hero";
-
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    padding: 0,
-    textAlign: "center",
-    margin: "0 auto",
-  },
-  grid: {
-    padding: "2rem",
-    alignItems: "center",
-  },
-  img: {
-    width: "100%",
-    maxWidth: "300px",
-  },
-});
 
 function LandingPage() {
   const classes = useStyles();

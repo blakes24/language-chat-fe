@@ -1,5 +1,5 @@
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./VerifyEmailStyles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -8,17 +8,6 @@ import { setToken } from "../../store/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { useState } from "react";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: "2rem",
-    textAlign: "center",
-  },
-  btn: {
-    marginTop: "1rem",
-  },
-}));
 
 function VerifyEmail() {
   const classes = useStyles();

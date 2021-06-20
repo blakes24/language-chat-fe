@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./AuthFormStyles";
 import Button from "@material-ui/core/Button";
 import SocialButton from "./SocialButton";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -23,52 +23,6 @@ const validate = (values) => {
   } 
   return errors;
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "25ch",
-  },
-  divider: {
-    display: "flex",
-    flexDirection: "row",
-    "&::before": {
-      content: '""',
-      flex: "1 1",
-      borderBottom: "1px solid lightgray",
-      margin: "auto",
-    },
-    "&::after": {
-      content: '""',
-      flex: "1 1",
-      borderBottom: "1px solid lightgray",
-      margin: "auto",
-    },
-  },
-  google: {
-    background: "#db4235",
-    color: "white",
-    "&:hover": {
-      background: "#b04238",
-    },
-  },
-  facebook: {
-    background: "#4267B2",
-    color: "white",
-    "&:hover": {
-      background: "#35538f",
-    },
-  },
-  icon: {
-    marginRight: "1rem",
-  },
-}));
 
 function AuthForm({
   text,

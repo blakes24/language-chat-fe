@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import UserList from "../user/UserList";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./DashboardStyles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,24 +10,6 @@ import Select from "@material-ui/core/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsers } from "../../store/usersSlice";
 import Loading from "../Loading";
-
-const useStyles = makeStyles({
-  root: {
-    marginTop: "1.5rem",
-    marginBottom: ".5rem",
-  },
-  formControl: {
-    marginBottom: ".5rem",
-    minWidth: 240,
-  },
-  formContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  err: {
-    textAlign: "center",
-  },
-});
 
 function Dashboard() {
   const classes = useStyles();

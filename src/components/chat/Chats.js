@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./ChatsStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRooms, addRoom, setCurrentRoom } from "../../store/roomSlice";
 import { useParams } from "react-router-dom";
@@ -8,55 +8,6 @@ import { Container, Divider, Typography } from "@material-ui/core";
 import RoomList from "./RoomList";
 import ChatRoom from "./ChatRoom";
 import ChatAvatar from "./ChatAvatar";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: 0,
-    margin: 0,
-    height: "calc(100% - 56px)",
-    [theme.breakpoints.up("sm")]: {
-      height: "calc(100% - 64px)",
-    },
-  },
-  list: {
-    width: 69,
-    paddingBottom: 0,
-    marginBottom: 0,
-    overflowX: "hidden",
-    overflowY: "scroll",
-    borderRight: "1px solid lightGray",
-    height: "100%",
-    maxHeight: "calc(100vh - 56px)",
-    flexFlow: "column",
-    display: "flex",
-    [theme.breakpoints.up("sm")]: {
-      width: "250px",
-      maxHeight: "calc(100vh - 64px)",
-    },
-  },
-  chat: {
-    height: "100%",
-    display: "flex",
-    width: "100%",
-  },
-  title: {
-    padding: ".5rem 0",
-    marginLeft: ".5rem",
-  },
-  chatContainer: {
-    padding: 0,
-    margin: 0,
-    width: "100%",
-  },
-  partner: {
-    marginTop: ".5rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "4rem",
-  },
-}));
 
 function Chats() {
   const classes = useStyles();
@@ -127,7 +78,15 @@ function Chats() {
           {error &&
             Array.isArray(error) &&
             error.map((err, idx) => <p key={idx}>{err}</p>)}
-          {currentRoom && <ChatRoom />}
+          {currentRoom ? <ChatRoom /> : (
+              <Typography
+              component={"p"}
+              align="center"
+              className={classes.empty}
+            >
+              Select a user to start chatting.
+            </Typography>
+          )}
         </Container>
       </div>
     </Container>

@@ -3,7 +3,6 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -17,50 +16,7 @@ import { updateCurrentUser } from "../../store/usersSlice";
 import EditUserModal from "./EditUserModal";
 import EditLangModal from "./EditLangModal";
 import DeleteUserModal from "./DeleteUserModal";
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: "1rem",
-    maxWidth: 900,
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "2rem",
-    },
-  },
-  item1: {
-    display: "flex",
-    padding: "1rem",
-    marginTop: "1rem",
-    justifyContent: "center",
-    order: 2,
-    [theme.breakpoints.up("sm")]: {
-      order: 1,
-      marginTop: "2rem",
-    },
-  },
-  item2: {
-    display: "flex",
-    padding: "1rem",
-    marginTop: "1rem",
-    justifyContent: "center",
-    order: 1,
-    [theme.breakpoints.up("sm")]: {
-      order: 2,
-      marginTop: "2rem",
-    },
-  },
-  level: {
-    width: "70%",
-    marginTop: ".4rem",
-    marginBottom: ".4rem",
-  },
-  switch: {
-    marginLeft: ".5rem",
-  },
-  btn: {
-    marginTop: "2rem",
-  },
-}));
+import { useStyles } from "./ProfileStyles";
 
 function Profile() {
   const user = useSelector((state) => state.users.current);

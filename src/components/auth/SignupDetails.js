@@ -1,6 +1,6 @@
 import { useFormik, FormikProvider } from "formik";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./SignupDetailsStyles";
 import Button from "@material-ui/core/Button";
 import FormikSelect from "../FormikSelect";
 import { useHistory } from "react-router-dom";
@@ -19,22 +19,6 @@ const validate = (values) => {
   }
   return errors;
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "25ch",
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
 
 function SignupDetails({
   email,
