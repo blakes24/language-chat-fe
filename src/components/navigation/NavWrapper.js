@@ -45,8 +45,8 @@ function NavWrapper({ window, children }) {
   let match = useRouteMatch("/chats");
 
   function logout() {
-    setMobileOpen(false);
     setLocalStorage("token", "");
+    setMobileOpen(false);
     dispatch(logoutUser());
     history.push("/");
   }

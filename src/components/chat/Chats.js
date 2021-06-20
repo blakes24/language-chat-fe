@@ -73,13 +73,14 @@ function Chats() {
               Chat
             </Typography>
           )}
-
           <Divider />
           {error &&
             Array.isArray(error) &&
             error.map((err, idx) => <p key={idx}>{err}</p>)}
-          {currentRoom ? <ChatRoom /> : (
-              <Typography
+          {currentRoom ? (
+            <ChatRoom />
+          ) : (
+            <Typography
               component={"p"}
               align="center"
               className={classes.empty}

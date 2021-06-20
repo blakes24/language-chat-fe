@@ -8,11 +8,13 @@ import SendIcon from "@material-ui/icons/Send";
 import { addMessage, fetchMessages } from "../../store/messageSlice";
 import ChatBubble from "./ChatBubble";
 import { BASE_URL } from "../../config";
+import Loading from "../Loading";
 
 function ChatRoom() {
   const classes = useStyles();
   const messages = useSelector((state) => state.messages.items);
   const currentRoom = useSelector((state) => state.rooms.current);
+  const loading = useSelector((state) => state.rooms.loading);
   const user = useSelector((state) => state.users.current);
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
@@ -89,13 +91,14 @@ function ChatRoom() {
         elevation={0}
         className={classes.messages}
       >
-        {messages.map((msg) => {
+        {loading === "pending" ? <Loading solid /> :
+        (messages.map((msg) => {
           if (msg.from === partner.id) {
             return <ChatBubble msg={msg} user={partner} key={msg.id} />;
           } else {
             return <ChatBubble msg={msg} user={user} key={msg.id} />;
           }
-        })}
+        }))}
         <div ref={messagesEndRef} />
       </Paper>
       <form onSubmit={sendMessage} className={classes.send}>

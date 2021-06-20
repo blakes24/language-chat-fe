@@ -19,7 +19,7 @@ class ChatApi {
     } catch (err) {
       let message = err.response
         ? err.response.data.error.message
-        : "Server error: try again later";
+        : "Server Error: Looks like something went wrong. Please try again later.";
       throw Array.isArray(message) ? message : [message];
     }
   }
