@@ -85,11 +85,10 @@ function Dashboard() {
       </Container>
       {loading === "pending" && <Loading solid />}
       {error &&
-        error.map((err, idx) => (
-          <p className={classes.err} key={idx}>
-            {err}
+          <p className={classes.err} >
+            {error[0] || "error"}
           </p>
-        ))}
+      }
       {users.length > 0 && <UserList users={users} />}
     </Container>
   );

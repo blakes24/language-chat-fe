@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import SignupDetails from "../components/auth/SignupDetails";
 import { MemoryRouter } from "react-router-dom";
-import store from "../store/root";
+import { store } from "../helpers/mockStore";
 import { Provider } from "react-redux";
 
 test("renders without crashing", () => {

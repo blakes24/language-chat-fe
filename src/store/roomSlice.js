@@ -1,15 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ChatApi from "../helpers/api";
+import { logoutUser } from "./logout";
 
 // data = { userId, partnerId }
 export const fetchRooms = createAsyncThunk(
   "rooms/fetchRooms",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.getRooms(data);
       return response.rooms;
     } catch (err) {
-      return rejectWithValue(err);
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      } else {
+        return rejectWithValue(err);
+      }
     }
   }
 );

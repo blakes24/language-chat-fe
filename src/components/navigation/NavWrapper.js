@@ -20,7 +20,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
-import { logoutUser } from "../../store/root";
+import { logoutUser } from "../../store/logout";
 import NavDrawer from "./NavDrawer";
 import { useStyles } from "./NavWrapperStyles";
 

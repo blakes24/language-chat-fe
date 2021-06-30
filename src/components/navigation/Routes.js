@@ -12,14 +12,14 @@ import jwtDecode from "jwt-decode";
 import NavWrapper from "../navigation/NavWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentUser } from "../../store/usersSlice";
-import { logoutUser } from "../../store/root";
+import { logoutUser } from "../../store/logout";
 import NotFound from "./NotFound";
 import VerifyEmail from "../auth/VerifyEmail";
 
 function Routes() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users.current);
-  const token = useSelector((state) => state.users.token);
+  const user = useSelector((state) => state.users?.current);
+  const token = useSelector((state) => state.users?.token);
 
   // if token is present get user details, if not remove user from state
   useEffect(() => {

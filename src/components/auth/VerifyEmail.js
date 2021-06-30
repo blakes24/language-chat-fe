@@ -30,11 +30,7 @@ function VerifyEmail() {
       setSuccess(true);
       setLoading(false);
     } catch (err) {
-      let errMsg =
-        err[0] === "Invalid token"
-          ? "Verification link is expired or invalid."
-          : err[0];
-      setMsg(errMsg);
+      setMsg(err[0]);
       setLoading(false);
       setFailed(true);
     }

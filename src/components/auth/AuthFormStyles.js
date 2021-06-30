@@ -28,14 +28,14 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   google: {
-    background: "#db4235",
+    backgroundColor: "#db4235",
     color: "white",
     "&:hover": {
       background: "#b04238",
     },
   },
   facebook: {
-    background: "#4267B2",
+    backgroundColor: "#4267B2",
     color: "white",
     "&:hover": {
       background: "#35538f",

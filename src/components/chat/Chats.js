@@ -8,6 +8,7 @@ import { Container, Divider, Typography } from "@material-ui/core";
 import RoomList from "./RoomList";
 import ChatRoom from "./ChatRoom";
 import ChatAvatar from "./ChatAvatar";
+import { logoutUser } from "../../store/logout";
 
 function Chats() {
   const classes = useStyles();
@@ -36,8 +37,12 @@ function Chats() {
           let res = await ChatApi.getRooms({ userId: user.id, partnerId });
           dispatch(addRoom(res.rooms[0]));
           dispatch(setCurrentRoom(res.rooms[0]));
-        } catch {
-          setError(err);
+        } catch (err) {
+          if (err?.[0] === "Invalid token") {
+            dispatch(logoutUser());
+          } else {
+            setError(err);
+          }
         }
       }
     }
