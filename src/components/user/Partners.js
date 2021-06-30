@@ -41,7 +41,7 @@ function Partners() {
       {!partners.length && loading === "pending" && <Loading solid />}
       {error &&
         (Array.isArray(error) ? (
-          error.map((err) => <p className={classes.err}>{err}</p>)
+          <p className={classes.err}>{error[0]}</p>
         ) : (
           <p className={classes.err}>{error.message}</p>
         ))}

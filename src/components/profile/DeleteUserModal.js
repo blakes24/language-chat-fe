@@ -4,7 +4,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../store/root";
+import { logoutUser } from "../../store/logout";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { useHistory } from "react-router-dom";
 import ChatApi from "../../helpers/api";

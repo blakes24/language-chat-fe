@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import Dashboard from "../components/home/Dashboard";
-import store from "../store/root";
+import { store } from "../helpers/mockStore";
 import { Provider } from "react-redux";
 
 test("renders without crashing", () => {

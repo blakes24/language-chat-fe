@@ -1,13 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ChatApi from "../helpers/api";
+import { logoutUser } from "./logout";
 
 export const fetchPartners = createAsyncThunk(
   "partners/fetchPartners",
-  async (userId, { rejectWithValue }) => {
+  async (userId, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.getPartners(userId);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
@@ -15,11 +19,14 @@ export const fetchPartners = createAsyncThunk(
 
 export const deletePartner = createAsyncThunk(
   "partners/deletePartner",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       await ChatApi.deletePartner(data);
       return data.partnerId;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }

@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ChatApi from "../helpers/api";
 import { getFromLocalStorage } from "../helpers/localStorage";
+import { logoutUser } from "./logout";
 
 export const fetchAllUsers = createAsyncThunk(
   "users/fetchAllUsers",
-  async (filter, { rejectWithValue }) => {
+  async (filter, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.getAllUsers(filter);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
@@ -16,11 +20,14 @@ export const fetchAllUsers = createAsyncThunk(
 
 export const fetchCurrentUser = createAsyncThunk(
   "users/fetchCurrentUser",
-  async (userId, { rejectWithValue }) => {
+  async (userId, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.getUser(userId);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
@@ -28,11 +35,14 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const updateCurrentUser = createAsyncThunk(
   "users/updateCurrentUser",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.updateUser(data.id, data);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
@@ -40,11 +50,14 @@ export const updateCurrentUser = createAsyncThunk(
 
 export const updateSpeaks = createAsyncThunk(
   "users/updateSpeaks",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.updateSpeaks(data.id, data);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
@@ -52,11 +65,14 @@ export const updateSpeaks = createAsyncThunk(
 
 export const updateLearning = createAsyncThunk(
   "users/updateLearning",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await ChatApi.updateLearning(data.id, data);
       return response;
     } catch (err) {
+      if (err?.[0] === "Invalid token") {
+        dispatch(logoutUser());
+      }
       return rejectWithValue(err);
     }
   }
