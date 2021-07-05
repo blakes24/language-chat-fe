@@ -1,6 +1,6 @@
-import { useStyles } from "./ChatBubbleStyles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+import { useStyles } from "./ChatBubbleStyles";
 
 function ChatBubble({ user, msg }) {
   const classes = useStyles();

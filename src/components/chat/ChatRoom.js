@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
-import { useStyles } from "./ChatRoomStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { Paper, Container, TextField } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,6 +8,7 @@ import { addMessage, fetchMessages } from "../../store/messageSlice";
 import ChatBubble from "./ChatBubble";
 import { BASE_URL } from "../../config";
 import Loading from "../Loading";
+import { useStyles } from "./ChatRoomStyles";
 
 function ChatRoom() {
   const classes = useStyles();

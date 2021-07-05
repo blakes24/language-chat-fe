@@ -1,4 +1,3 @@
-import { useStyles } from "./ChatsStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRooms, addRoom, setCurrentRoom } from "../../store/roomSlice";
 import { useParams } from "react-router-dom";
@@ -9,6 +8,7 @@ import RoomList from "./RoomList";
 import ChatRoom from "./ChatRoom";
 import ChatAvatar from "./ChatAvatar";
 import { logoutUser } from "../../store/logout";
+import { useStyles } from "./ChatsStyles";
 
 function Chats() {
   const classes = useStyles();

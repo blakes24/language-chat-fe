@@ -1,6 +1,5 @@
 import { Button } from "@material-ui/core";
 import { useRef, useState, useCallback } from "react";
-import { useStyles } from "./ImageUploaderStyles";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser } from "../../store/usersSlice";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../config";
@@ -9,6 +8,7 @@ import Cropper from "react-easy-crop";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import { useStyles } from "./ImageUploaderStyles";
 
 
 function ImageUploader({ imageUrl, userId }) {

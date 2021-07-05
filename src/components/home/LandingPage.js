@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./LandingPageStyles";
 import Grid from "@material-ui/core/Grid";
 import Hero from "./Hero";
+import { useStyles } from "./LandingPageStyles";
 
 function LandingPage() {
   const classes = useStyles();

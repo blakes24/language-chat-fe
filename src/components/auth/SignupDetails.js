@@ -1,6 +1,5 @@
 import { useFormik, FormikProvider } from "formik";
 import TextField from "@material-ui/core/TextField";
-import { useStyles } from "./SignupDetailsStyles";
 import Button from "@material-ui/core/Button";
 import FormikSelect from "../FormikSelect";
 import { useHistory } from "react-router-dom";
@@ -10,6 +9,7 @@ import { setToken } from "../../store/usersSlice";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { useState } from "react";
 import Loading from "../Loading";
+import { useStyles } from "./SignupDetailsStyles";
 
 const validate = (values) => {
   const errors = {};

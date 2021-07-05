@@ -1,5 +1,4 @@
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./VerifyEmailStyles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { useState } from "react";
 import Loading from "../Loading";
+import { useStyles } from "./VerifyEmailStyles";
 
 function VerifyEmail() {
   const classes = useStyles();

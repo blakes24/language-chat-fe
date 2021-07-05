@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useStyles } from "./SignupStyles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import SignupDetails from "./SignupDetails";
 import ChatApi from "../../helpers/api";
 import Card from "@material-ui/core/Card";
+import { useStyles } from "./SignupStyles";
 
 function Signup() {
   const [formPage, setFormPage] = useState(1);

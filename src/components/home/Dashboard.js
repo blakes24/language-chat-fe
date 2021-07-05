@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import UserList from "../user/UserList";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { useStyles } from "./DashboardStyles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,6 +9,7 @@ import Select from "@material-ui/core/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsers } from "../../store/usersSlice";
 import Loading from "../Loading";
+import { useStyles } from "./DashboardStyles";
 
 function Dashboard() {
   const classes = useStyles();

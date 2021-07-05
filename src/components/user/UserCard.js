@@ -1,5 +1,4 @@
-import {useState} from "react"
-import { useStyles } from "./UserCardStyles";
+import { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -10,12 +9,13 @@ import ChatIcon from "@material-ui/icons/Chat";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import ChatApi from "../../helpers/api"
+import ChatApi from "../../helpers/api";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
 import { deletePartner } from "../../store/partnerSlice";
+import { useStyles } from "./UserCardStyles";
 
 function UserCard({ cardUser, partner }) {
   const classes = useStyles();
@@ -37,14 +37,14 @@ function UserCard({ cardUser, partner }) {
     setToastOpen(true);
   };
 
-  async function handleAddPartner(){
+  async function handleAddPartner() {
     try {
-      await ChatApi.addPartner(user.id, {partnerId: cardUser.id})
+      await ChatApi.addPartner(user.id, { partnerId: cardUser.id });
       handleToastOpen("Partner Added!");
     } catch (err) {
-      const msg = Array.isArray(err) ? err[0] : err.message
+      const msg = Array.isArray(err) ? err[0] : err.message;
       handleToastOpen(msg);
-      console.error(err)
+      console.error(err);
     }
   }
 
