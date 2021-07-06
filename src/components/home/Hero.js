@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./HeroStyles";
 import Button from "@material-ui/core/Button";
 import { Link as RouterLink } from "react-router-dom";
+import { useStyles } from "./HeroStyles";
 
 function Hero() {
   const classes = useStyles();

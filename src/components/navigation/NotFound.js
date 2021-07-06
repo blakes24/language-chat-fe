@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./NotFoundStyles";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { useStyles } from "./NotFoundStyles";
 
 function NotFound() {
   const classes = useStyles();

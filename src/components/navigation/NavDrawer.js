@@ -3,13 +3,13 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useStyles } from "./NavDrawerStyles";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import PeopleIcon from "@material-ui/icons/People";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ChatIcon from "@material-ui/icons/Chat";
+import { useStyles } from "./NavDrawerStyles";
 
 function NavDrawer({ closeDrawer, logout }) {
   const classes = useStyles();

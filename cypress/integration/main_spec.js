@@ -199,6 +199,15 @@ describe("Partners", () => {
   });
 
   it("lets a user add and view partners", () => {
+    cy.contains("Partners").click();
+    cy.get("h1").should("contain", "Partners");
+    cy.get("body").should("contain", "No partners yet");
+
+    cy.contains("Home").click();
+    cy.get("h1").should("contain", "Find a partner and start chatting!");
+    cy.get(".MuiSelect-root").click();
+    cy.get("li").contains("Any").click();
+
     cy.get("button[aria-label='add partner']").first().click();
     cy.get("[role='alert']").should("be.visible");
 

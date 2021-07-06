@@ -1,6 +1,6 @@
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./UserListStyles";
 import UserCard from "./UserCard";
+import { useStyles } from "./UserListStyles";
 
 function UserList({ users, partner }) {
   const classes = useStyles();

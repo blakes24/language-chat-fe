@@ -1,5 +1,4 @@
 import React from "react";
-import { useStyles } from "./RoomListStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -9,6 +8,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import { NavLink } from "react-router-dom";
 import PeopleIcon from "@material-ui/icons/People";
 import ChatAvatar from "./ChatAvatar";
+import { useStyles } from "./RoomListStyles";
 
 function RoomList({ rooms }) {
   const classes = useStyles();

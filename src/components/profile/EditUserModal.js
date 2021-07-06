@@ -4,9 +4,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useFormik, FormikProvider } from "formik";
-import { useStyles } from "./EditUserModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentUser } from "../../store/usersSlice";
+import { useStyles } from "./EditUserModalStyles";
 
 const validate = (values) => {
   const errors = {};

@@ -3,11 +3,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useFormik, FormikProvider } from "formik";
-import { useStyles } from "./EditLangModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSpeaks, updateLearning } from "../../store/usersSlice";
 import FormikSelect from "../FormikSelect";
 import { DialogActions } from "@material-ui/core";
+import { useStyles } from "./EditLangModalStyles";
 
 const validate = (values) => {
   const errors = {};

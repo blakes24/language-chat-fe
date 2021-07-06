@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
-import { useStyles } from "./AuthFormStyles";
 import Button from "@material-ui/core/Button";
 import SocialButton from "./SocialButton";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "../Loading";
+import { useStyles } from "./AuthFormStyles";
 
 const validate = (values) => {
   const errors = {};

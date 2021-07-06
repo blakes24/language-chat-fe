@@ -1,7 +1,7 @@
 import React from "react";
-import { useStyles } from "./ChatAvatarStyles";
 import Avatar from "@material-ui/core/Avatar";
 import { Badge } from "@material-ui/core";
+import { useStyles } from "./ChatAvatarStyles";
 
 function ChatAvatar({ partner, size = "small" }) {
   const classes = useStyles();

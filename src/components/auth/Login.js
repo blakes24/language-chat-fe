@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useStyles } from "./LoginStyles";
 import Container from "@material-ui/core/Container";
 import AuthForm from "./AuthForm";
 import { useHistory } from "react-router-dom";
@@ -8,6 +7,7 @@ import { setToken } from "../../store/usersSlice";
 import ChatApi from "../../helpers/api";
 import Card from "@material-ui/core/Card";
 import { setLocalStorage } from "../../helpers/localStorage";
+import { useStyles } from "./LoginStyles";
 
 function Login() {
   const classes = useStyles();
