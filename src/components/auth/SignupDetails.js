@@ -50,16 +50,16 @@ function SignupDetails({
     validate,
     onSubmit: async (values) => {
       try {
-        setLoading(true)
+        setLoading(true);
         const res = await ChatApi.register(values);
         dispatch(setToken(res));
         setLocalStorage("token", res);
-        if  (values.socialId) {
-          history.push("/");
-        } else {
-          history.push("/verify");
-        }
-        
+        history.push("/");
+        // if  (values.socialId) {
+        //   history.push("/");
+        // } else {
+        //   history.push("/verify");
+        // }
       } catch (err) {
         setLoading(false);
         formik.errors.name = err;
