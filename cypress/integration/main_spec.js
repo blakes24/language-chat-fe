@@ -4,7 +4,7 @@ describe("Sign up", () => {
   });
   it("lets a user sign up", () => {
     cy.intercept("POST", "/auth/register").as("signup");
-    cy.intercept("PATCH", "/auth/verify-email").as("verify");
+    // cy.intercept("PATCH", "/auth/verify-email").as("verify");
 
     cy.visit("/");
     cy.contains("Sign Up").click();
@@ -30,20 +30,23 @@ describe("Sign up", () => {
     cy.wait("@signup");
 
     cy.location("pathname").should("not.include", "/signup");
+    cy.get("body").should("contain", "Find a partner and start chatting!");
 
-    cy.location("pathname").should("include", "/verify");
+    // Tests for email verification (disabled)
 
-    cy.get("body").should("contain", "A verification link has been sent");
+    // cy.location("pathname").should("include", "/verify");
 
-    cy.visit(
-      "/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN5dGVzdGVyQG1haWwuY29tIiwiaWF0IjoxNjI0MDQ0MzQwfQ.OqC0KLX_oWbB_fWXN1mADAqZnvamV9zUJta-ctE82LA"
-    );
+    // cy.get("body").should("contain", "A verification link has been sent");
 
-    cy.contains("Verify").click();
-    //wait for email verification to return
-    cy.wait("@verify");
-    cy.get("body").should("contain", "Your account has been verified.");
-    cy.get(".MuiToolbar-root").should("contain", "test");
+    // cy.visit(
+    //   "/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN5dGVzdGVyQG1haWwuY29tIiwiaWF0IjoxNjI0MDQ0MzQwfQ.OqC0KLX_oWbB_fWXN1mADAqZnvamV9zUJta-ctE82LA"
+    // );
+
+    // cy.contains("Verify").click();
+    // //wait for email verification to return
+    // cy.wait("@verify");
+    // cy.get("body").should("contain", "Your account has been verified.");
+    // cy.get(".MuiToolbar-root").should("contain", "test");
   });
 
   it("displays error for missing credentials", () => {
@@ -62,17 +65,17 @@ describe("Sign up", () => {
     cy.get("#bio-helper-text").should("contain", "Required");
   });
 
-  it("displays error for invalid verification link", () => {
-    cy.intercept("PATCH", "/auth/verify-email").as("verify");
-    cy.visit("/verify/badlink");
-    cy.contains("Verify").click();
-    //wait for email verification to return
-    cy.wait("@verify");
-    cy.get("body").should(
-      "contain",
-      "Verification link is expired or invalid."
-    );
-  });
+  // it("displays error for invalid verification link", () => {
+  //   cy.intercept("PATCH", "/auth/verify-email").as("verify");
+  //   cy.visit("/verify/badlink");
+  //   cy.contains("Verify").click();
+  //   //wait for email verification to return
+  //   cy.wait("@verify");
+  //   cy.get("body").should(
+  //     "contain",
+  //     "Verification link is expired or invalid."
+  //   );
+  // });
 });
 
 describe("Log in", () => {

@@ -44,26 +44,27 @@ function Routes() {
       <Switch>
         <Route exact path="/">
           {user ? (
-            user.verified ? (
-              <Dashboard />
-            ) : (
-              <Redirect to="/verify" />
-            )
+            <Dashboard />
           ) : (
+            // user.verified ? (
+            //   <Dashboard />
+            // ) : (
+            //   <Redirect to="/verify" />
+            // )
             <LandingPage />
           )}
         </Route>
         <Route exact path="/profile">
-          {user && user.verified ? <Profile /> : <Redirect to="/" />}
+          {user ? <Profile /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/partners">
-          {user && user.verified ? <Partners /> : <Redirect to="/" />}
+          {user ? <Partners /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/chats/:roomId">
-          {user && user.verified ? <Chats /> : <Redirect to="/" />}
+          {user ? <Chats /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/chats">
-          {user && user.verified ? <Chats /> : <Redirect to="/" />}
+          {user ? <Chats /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/signup">
           <Signup />
