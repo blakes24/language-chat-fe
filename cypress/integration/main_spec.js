@@ -32,6 +32,8 @@ describe("Sign up", () => {
     cy.location("pathname").should("not.include", "/signup");
     cy.get("body").should("contain", "Find a partner and start chatting!");
 
+    // Tests for email verification (disabled)
+
     // cy.location("pathname").should("include", "/verify");
 
     // cy.get("body").should("contain", "A verification link has been sent");
