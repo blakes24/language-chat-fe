@@ -14,7 +14,8 @@ describe("Sign up", () => {
     cy.get("#email")
       .type("cytester@mail.com")
       .should("have.value", "cytester@mail.com");
-    cy.get("#password").type("cytesterpw{enter}");
+    cy.get("#password").type("cytesterpw");
+    cy.get("#passwordConfirm").type("cytesterpw{enter}");
 
     cy.get("#name").type("test").should("have.value", "test");
     cy.get("#bio").type("stuff").should("have.value", "stuff");
@@ -55,7 +56,16 @@ describe("Sign up", () => {
     cy.get("#password").type("password{enter}");
     cy.get("#email-helper-text").should("contain", "Required");
 
-    cy.get("#email").type("cytester@mail.com{enter}");
+    // enter wrong password confirmation
+    cy.get("#passwordConfirm").type("wrong{enter}");
+    cy.get("#passwordConfirm-helper-text").should(
+      "contain",
+      "Passwords do not match"
+    );
+
+    // add correct credentials to move to second page
+    cy.get("#email").type("cytester@mail.com");
+    cy.get("#passwordConfirm").clear().type("password{enter}");
 
     //should show required if only spaces are entered
     cy.get("#bio").type("  ");

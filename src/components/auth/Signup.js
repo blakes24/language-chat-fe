@@ -63,6 +63,7 @@ function Signup() {
             handleFacebook={facebookSignup}
             handleGoogle={googleSignup}
             handleSubmit={signup}
+            newUser={true}
           />
         ) : (
           <SignupDetails
