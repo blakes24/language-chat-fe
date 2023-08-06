@@ -21,6 +21,11 @@ const validate = (values) => {
   } else if (values.password.includes(" ")) {
     errors.password = "Invalid password (cannot contain spaces)";
   }
+  if (values.passwordConfirm) {
+    if (values.password !== values.passwordConfirm) {
+      errors.passwordConfirm = "Passwords do not match";
+    }
+  }
   return errors;
 };
 
@@ -44,9 +49,6 @@ function AuthForm({
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        if (newUser && values.password !== values.passwordConfirm) {
-          throw "Passwords do not match";
-        }
         await handleSubmit(values);
       } catch (err) {
         setLoading(false);
