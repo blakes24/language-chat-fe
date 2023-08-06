@@ -65,7 +65,7 @@ describe("Sign up", () => {
 
     // add correct credentials to move to second page
     cy.get("#email").type("cytester@mail.com");
-    cy.get("#passwordConfirm").type("password{enter}");
+    cy.get("#passwordConfirm").clear().type("password{enter}");
 
     //should show required if only spaces are entered
     cy.get("#bio").type("  ");
