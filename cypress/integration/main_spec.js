@@ -58,7 +58,10 @@ describe("Sign up", () => {
 
     // enter wrong password confirmation
     cy.get("#passwordConfirm").type("wrong{enter}");
-    cy.get("#passwordConfirm-helper-text").should("contain", "Required");
+    cy.get("#passwordConfirm-helper-text").should(
+      "contain",
+      "Passwords do not match"
+    );
 
     // add correct credentials to move to second page
     cy.get("#email").type("cytester@mail.com");
