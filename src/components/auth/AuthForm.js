@@ -18,9 +18,9 @@ const validate = (values) => {
   }
   if (!values.password) {
     errors.password = "Required";
-  } else if (values.password.includes(' ')) {
-    errors.password = "Invalid password (cannot contain spaces)"
-  } 
+  } else if (values.password.includes(" ")) {
+    errors.password = "Invalid password (cannot contain spaces)";
+  }
   return errors;
 };
 
@@ -30,6 +30,7 @@ function AuthForm({
   handleGoogle,
   handleFacebook,
   handleFail,
+  newUser,
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -37,15 +38,21 @@ function AuthForm({
     initialValues: {
       email: "",
       password: "",
+      passwordConfirm: "",
     },
     validate,
     onSubmit: async (values) => {
       setLoading(true);
       try {
+        if (newUser && values.password !== values.passwordConfirm) {
+          throw "Passwords do not match";
+        }
         await handleSubmit(values);
       } catch (err) {
         setLoading(false);
-        formik.errors.password = err;
+        newUser
+          ? (formik.errors.passwordConfirm = err)
+          : (formik.errors.password = err);
       }
     },
   });
@@ -96,6 +103,28 @@ function AuthForm({
             formik.errors.password
           }
         />
+        {newUser && (
+          <TextField
+            id="passwordConfirm"
+            name="passwordConfirm"
+            label="Confirm Password"
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+            style={{ margin: 8 }}
+            size="small"
+            fullWidth
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.passwordConfirm}
+            FormHelperTextProps={{ error: true }}
+            helperText={
+              formik.errors.passwordConfirm &&
+              formik.touched.passwordConfirm &&
+              formik.errors.passwordConfirm
+            }
+          />
+        )}
         <Button
           variant="contained"
           color="secondary"
